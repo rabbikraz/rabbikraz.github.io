@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlists | Rabbi Kraz's Shiurim</title>
+    <meta property="og:image" content="https://raw.githubusercontent.com/rabbikraz/rabbikraz/refs/heads/main/Kraz%20Hero%202.png">
+    <link rel="icon" href="https://raw.githubusercontent.com/rabbikraz/rabbikraz/main/Kraz%20Icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2d5aa0;
+            --accent-color: #4a90e2;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.4;
+            color: var(--text-light);
+            background-color: var(--bg-light);
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 1rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.1;
+        }
+        header > * {
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon {
+            display: block;
+            margin: 0 auto 1rem;
+            width: clamp(120px, 20vw, 200px);
+            height: auto;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .header-icon:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.0;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .hero-cta {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--white);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            background-color: #f0f4f8;
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .playlists-section {
+            padding: 3rem 0;
+        }
+        .playlists-section h2 {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+        }
+        .accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .accordion-item {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .accordion-item summary {
+            cursor: pointer;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            padding: 1rem 1.5rem;
+            background: var(--white);
+            border: none;
+            width: 100%;
+            text-align: left;
+            list-style: none;
+            transition: background 0.3s ease;
+        }
+        .accordion-item summary:hover {
+            background: #f0f4f8;
+        }
+        .accordion-item[open] summary {
+            background: var(--bg-light);
+        }
+        .accordion-content {
+            padding: 0 1.5rem 1.5rem;
+            background: var(--white);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .accordion-item[open] .accordion-content {
+            max-height: 1000px; /* Adjust as needed */
+        }
+        .playlist-list {
+            list-style: none;
+            padding: 0;
+        }
+        .parsha-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .parsha-item:last-child {
+            border-bottom: none;
+        }
+        .parsha-title {
+            font-weight: 500;
+            color: var(--primary-color);
+            flex-grow: 1;
+        }
+        .mini-logos {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .mini-logo {
+            display: inline-block;
+            text-decoration: none;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        .mini-logo:hover {
+            background: #f0f4f8;
+        }
+        .mini-logo i {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+        footer p {
+            opacity: 0.8;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem 2rem;
+            }
+            .header-icon {
+                width: clamp(100px, 25vw, 150px);
+            }
+            .playlists-section {
+                padding: 2rem 0;
+            }
+            .playlists-section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            .accordion-item summary {
+                font-size: 1.3rem;
+                padding: 0.75rem 1rem;
+            }
+            .parsha-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            .mini-logos {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://raw.githubusercontent.com/rabbikraz/rabbikraz/main/Kraz%20Icon.png" alt="Rabbi Kraz Icon" class="header-icon">
+        <h1>Playlists</h1>
+        <p>Explore organized collections of shiurim by Sefer, Holidays, and more.</p>
+        <a href="index.html" class="hero-cta">Back to Home</a>
+    </header>
+    <main>
+        <section class="playlists-section">
+            <h2>Shiurim Playlists</h2>
+            <div class="accordion">
+                <details class="accordion-item">
+                    <summary>Bereishis</summary>
+                    <div class="accordion-content">
+                        <ul class="playlist-list">
+                            <li class="parsha-item">
+                                <span class="parsha-title">Bereishis</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Bereishis&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Bereishis%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Noach</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Noach&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Noach%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Lech Lecha</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/playlist?list=PLFjvIKKaTDH9gtF7MG2P2Qz45OftfBire" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Lech%20Lecha%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayeira</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayeira&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayeira%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Chayei Sarah</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Chayei%20Sarah&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Chayei%20Sarah%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Toldos</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Toldos&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Toldos%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayetzei</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayetzei&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayetzei%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayishlach</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayishlach&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayishlach%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayeshev</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayeshev&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayeshev%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Mikeitz</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Mikeitz&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Mikeitz%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayigash</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayigash&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayigash%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayechi</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayechi&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayechi%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="accordion-item">
+                    <summary>Shmos</summary>
+                    <div class="accordion-content">
+                        <ul class="playlist-list">
+                            <li class="parsha-item">
+                                <span class="parsha-title">Shmos</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Shmos&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Shmos%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vaera</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vaera&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vaera%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Bo</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Bo&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Bo%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Beshalach</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Beshalach&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Beshalach%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Yisro</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Yisro&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Yisro%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Mishpatim</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Mishpatim&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Mishpatim%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Teruma</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Teruma&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Teruma%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Tetzave</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Tetzave&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Tetzave%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Ki Sisa</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Ki%20Sisa&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Ki%20Sisa%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayakhel</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayakhel&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayakhel%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Pekudei</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Pekudei&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Pekudei%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="accordion-item">
+                    <summary>Vayikra</summary>
+                    <div class="accordion-content">
+                        <ul class="playlist-list">
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayikra</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayikra&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayikra%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Tzav</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Tzav&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Tzav%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Shemini</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Shemini&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Shemini%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Tazria</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Tazria&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Tazria%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Metzorah</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Metzorah&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Metzorah%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Acharei Mos</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Acharei%20Mos&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Acharei%20Mos%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Kedoshim</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Kedoshim&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Kedoshim%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Emor</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Emor&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Emor%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Behar</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Behar&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Behar%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Bechukosai</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Bechukosai&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Bechukosai%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="accordion-item">
+                    <summary>Bamidbar</summary>
+                    <div class="accordion-content">
+                        <ul class="playlist-list">
+                            <li class="parsha-item">
+                                <span class="parsha-title">Bamidbar</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Bamidbar&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Bamidbar%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Naso</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Naso&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Naso%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Beha'aloscha</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Beha%27aloscha&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Beha%27aloscha%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Shelach</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Shelach&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Shelach%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Korach</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Korach&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Korach%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Chukas</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Chukas&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Chukas%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Balak</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Balak&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Balak%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Pinchas</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Pinchas&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Pinchas%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Matos</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Matos&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Matos%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Massei</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Massei&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Massei%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="accordion-item">
+                    <summary>Devarim</summary>
+                    <div class="accordion-content">
+                        <ul class="playlist-list">
+                            <li class="parsha-item">
+                                <span class="parsha-title">Devarim</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Devarim&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Devarim%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Va'eschanan</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Va%27eschanan&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Va%27eschanan%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Eikev</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Eikev&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Eikev%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Re'eh</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Re%27eh&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Re%27eh%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Shoftim</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Shoftim&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Shoftim%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Ki Seitzei</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Ki%20Seitzei&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Ki%20Seitzei%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Ki Savo</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Ki%20Savo&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Ki%20Savo%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Nitzavim</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Nitzavim&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Nitzavim%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Vayelech</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Vayelech&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Vayelech%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Ha'azinu</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Ha%27azinu&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Ha%27azinu%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">V'zos Habracha</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=V%27zos%20Habracha&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/V%27zos%20Habracha%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="accordion-item">
+                    <summary>Holidays</summary>
+                    <div class="accordion-content">
+                        <ul class="playlist-list">
+                            <li class="parsha-item">
+                                <span class="parsha-title">Rosh Hashana</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Rosh%20Hashana&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Rosh%20Hashana%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Yom Kippur</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Yom%20Kippur&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Yom%20Kippur%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Sukkos</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Sukkos&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Sukkos%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Chanukah</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Chanukah&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Chanukah%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Purim</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Purim&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Purim%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Pesach</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Pesach&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Pesach%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Sefira / Lag Ba'omer</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Sefira%20Lag%20Ba%27omer&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Sefira%20Lag%20Ba%27omer%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Shavuos</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Shavuos&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Shavuos%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Tisha B'av</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Tisha%20B%27av&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Tisha%20B%27av%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+                <details class="accordion-item">
+                    <summary>Miscellaneous</summary>
+                    <div class="accordion-content">
+                        <ul class="playlist-list">
+                            <li class="parsha-item">
+                                <span class="parsha-title">Halacha</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Halacha&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Halacha%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">History and its figures</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=History&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/History%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                            <li class="parsha-item">
+                                <span class="parsha-title">Moshiach</span>
+                                <div class="mini-logos">
+                                    <a href="https://www.youtube.com/results?search_query=Moshiach&channel_id=UCMrMvXraTLhAtpb0JZQOKhQ" target="_blank" class="mini-logo yt" title="Listen on YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://open.spotify.com/search/Moshiach%20rabbi%20kraz/episodes" target="_blank" class="mini-logo sp" title="Listen on Spotify"><i class="fab fa-spotify"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Rabbi Kraz's Shiurim. All rights reserved. | <a href="#top" class="back-link">Back to Top</a></p>
+    </footer>
+    <script>
+        // Simple polyfill for details/summary expand animation (optional, for better UX)
+        document.querySelectorAll('details').forEach(detail => {
+            detail.addEventListener('toggle', () => {
+                if (detail.open) {
+                    const content = detail.querySelector('.accordion-content');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    detail.querySelector('.accordion-content').style.maxHeight = '0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
