@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor a Shiur | Rabbi Kraz's Shiurim</title>
+    <meta property="og:image" content="https://raw.githubusercontent.com/rabbikraz/rabbikraz/refs/heads/main/Kraz%20Hero%202.png">
+    <link rel="icon" href="https://raw.githubusercontent.com/rabbikraz/rabbikraz/main/Kraz%20Icon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2d5aa0;
+            --accent-color: #4a90e2;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.4;
+            color: var(--text-light);
+            background-color: var(--bg-light);
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 1rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.1;
+        }
+        header > * {
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon {
+            display: block;
+            margin: 0 auto 1rem;
+            width: clamp(120px, 20vw, 200px);
+            height: auto;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        .header-icon:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.0;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .hero-cta {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--white);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            background-color: #f0f4f8;
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .sponsor-section {
+            padding: 3rem 0;
+        }
+        .sponsor-section h2 {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .sponsor-section p {
+            text-align: center;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+        .sponsor-form-card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .amount-container {
+            display: none;
+        }
+        .amount-container.show {
+            display: block;
+        }
+        .amount-group {
+            display: none;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .amount-group.show {
+            display: flex;
+        }
+        .monthly-amounts .amount-btn:nth-child(6) {
+            flex: 2;
+        }
+        .shiur-amounts {
+            justify-content: space-around;
+        }
+        .amount-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 0.75rem;
+            background: var(--bg-light);
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+        .amount-btn:hover,
+        .amount-btn.selected {
+            background: var(--accent-color);
+            color: var(--white);
+            border-color: var(--accent-color);
+        }
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+        .parsha-input {
+            display: none;
+            margin-top: 0.5rem;
+        }
+        .parsha-input.show {
+            display: block;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        .thank-you-message {
+            display: none;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .thank-you-message.show {
+            display: block;
+        }
+        .thank-you-message h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        .thank-you-message p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        .thank-you-message .cta {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .thank-you-message .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+        footer p {
+            opacity: 0.8;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 3rem 1rem 2rem;
+            }
+            .header-icon {
+                width: clamp(100px, 25vw, 150px);
+            }
+            .sponsor-section {
+                padding: 2rem 0;
+            }
+            .sponsor-section h2 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+            .sponsor-form-card {
+                padding: 1.5rem;
+            }
+            .thank-you-message {
+                padding: 1.5rem;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .amount-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://raw.githubusercontent.com/rabbikraz/rabbikraz/main/Kraz%20Icon.png" alt="Rabbi Kraz Icon" class="header-icon">
+        <h1>Sponsor a Shiur</h1>
+        <p>Support the timeless wisdom of Torah by sponsoring a shiur in honor of a loved one, a special occasion, or simply to further Rabbi Kraz's teachings.</p>
+        <a href="index.html" class="hero-cta">Back to Home</a>
+    </header>
+    <main>
+        <section class="sponsor-section">
+            <h2>Make a Dedication</h2>
+            <p>Your generous sponsorship helps bring inspiring shiurim to thousands seeking spiritual growth. Every contribution makes a profound impact.</p>
+            <form id="sponsor-form" class="sponsor-form-card" action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="sponsorship-type">Sponsorship Type *</label>
+                    <select id="sponsorship-type" name="sponsorship_type" onchange="toggleAmounts()" required>
+                        <option value="">Choose...</option>
+                        <option value="monthly">Monthly Support</option>
+                        <option value="shiur">Sponsor a Shiur</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sponsorship Amount</label>
+                    <div id="amount-container" class="amount-container">
+                        <div id="monthly-amounts" class="amount-group monthly-amounts">
+                            <button type="button" class="amount-btn" onclick="selectAmount(18)">$18</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(36)">$36</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(54)">$54</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(100)">$100</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(180)">$180</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(360)">$360</button>
+                        </div>
+                        <div id="shiur-amounts" class="amount-group shiur-amounts">
+                            <button type="button" class="amount-btn" onclick="selectAmount(360)">$360 (Partial)</button>
+                            <button type="button" class="amount-btn" onclick="selectAmount(720)">$720 (Full Shiur)</button>
+                        </div>
+                        <input type="number" id="amount" name="amount" placeholder="Or enter custom amount ($)" min="18" step="1" style="margin-top: 0.5rem;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dedication">Dedication Message (Optional)</label>
+                    <textarea id="dedication" name="dedication" placeholder="In honor of... / In memory of..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="preferred-shiur">Preferred Shiur</label>
+                    <select id="preferred-shiur" name="preferred-shiur" onchange="toggleParshaInput()">
+                        <option value="any">Any Upcoming Shiur</option>
+                        <option value="parsha">Choose a Parsha</option>
+                    </select>
+                    <div class="parsha-input" id="parsha-input">
+                        <input type="text" id="parsha-name" name="parsha-name" placeholder="Enter Parsha Name (e.g., Bereishis)">
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Submit Sponsorship</button>
+            </form>
+            <div id="thank-you-message" class="thank-you-message">
+                <h3>Thank You for Your Generous Sponsorship!</h3>
+                <p>We appreciate your support in spreading the light of Torah. We will be in touch shortly to deal with payment and finalize your dedication.</p>
+                <a href="index.html" class="cta">Back to Home</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Rabbi Kraz's Shiurim. All rights reserved. | <a href="#top" class="back-link">Back to Top</a></p>
+    </footer>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Replace with your EmailJS public key (User ID)
+        emailjs.init("YOUR_PUBLIC_KEY"); // Get this from EmailJS dashboard
+
+        function toggleAmounts() {
+            const select = document.getElementById('sponsorship-type');
+            const container = document.getElementById('amount-container');
+            if (select.value !== '') {
+                container.classList.add('show');
+                const type = select.value;
+                document.getElementById('monthly-amounts').classList.toggle('show', type === 'monthly');
+                document.getElementById('shiur-amounts').classList.toggle('show', type === 'shiur');
+                document.getElementById('amount').value = '';
+                document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+            } else {
+                container.classList.remove('show');
+            }
+        }
+        function selectAmount(value) {
+            document.getElementById('amount').value = value;
+            document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+        function toggleParshaInput() {
+            const select = document.getElementById('preferred-shiur');
+            const input = document.getElementById('parsha-input');
+            input.classList.toggle('show', select.value === 'parsha');
+            if (select.value !== 'parsha') {
+                document.getElementById('parsha-name').value = '';
+            }
+        }
+        document.getElementById('sponsor-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            // Format email parameters
+            const templateParams = {
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                sponsorship_type: data.sponsorship_type,
+                amount: data.amount,
+                dedication: data.dedication || 'None provided',
+                preferred_shiur: data['preferred-shiur'],
+                parsha_name: data['parsha-name'] || 'N/A',
+                message: `New Sponsorship Request from ${data.name}\n\nDetails:\n- Type: ${data.sponsorship_type}\n- Amount: $${data.amount}\n- Dedication: ${data.dedication || 'None'}\n- Preferred Shiur: ${data['preferred-shiur']}\n- Parsha: ${data['parsha-name'] || 'N/A'}\n\nContact:\n- Email: ${data.email}\n- Phone: ${data.phone}`
+            };
+            // Send email via EmailJS
+            // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with actual values from EmailJS dashboard
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
+                    // Hide form and show thank you
+                    document.getElementById('sponsor-form').style.display = 'none';
+                    document.getElementById('thank-you-message').classList.add('show');
+                }, function(error) {
+                    console.log('Failed to send email:', error);
+                    alert('There was an issue submitting your form. Please try again or contact us directly.');
+                });
+        });
+    </script>
+</body>
+</html>
