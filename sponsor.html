@@ -396,7 +396,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         // Replace with your EmailJS public key (User ID)
-        emailjs.init("YOUR_PUBLIC_KEY"); // Get this from EmailJS dashboard
+        emailjs.init(o8MtNmiYhweLEBJz8); // Get this from EmailJS dashboard
 
         function toggleAmounts() {
             const select = document.getElementById('sponsorship-type');
@@ -447,7 +447,7 @@
             };
             // Send email via EmailJS
             // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with actual values from EmailJS dashboard
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send(service_metidwd, template_h0p4bws, templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully!', response.status, response.text);
                     // Hide form and show thank you
@@ -461,3 +461,4 @@
     </script>
 </body>
 </html>
+
