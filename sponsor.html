@@ -415,11 +415,10 @@
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
-        // Your EmailJS keys
+        // Your EmailJS keys are now plugged in!
         const PUBLIC_KEY = 'o8MtNmiYhweLEBJz8';
         const SERVICE_ID = 'service_metidwd';
-        const ADMIN_TEMPLATE_ID = 'template_h0p4bws';  // For Rabbi Kraz
-        const THANKYOU_TEMPLATE_ID = 'template_yt592h8';  // For sponsor
+        const TEMPLATE_ID = 'template_h0p4bws';
 
         emailjs.init(PUBLIC_KEY);
 
@@ -457,38 +456,20 @@
             event.preventDefault();
             const submitBtn = document.getElementById('submit-btn');
             const errorMsg = document.getElementById('error-message');
-            const form = this;
 
             // Hide error, disable button
             errorMsg.classList.remove('show');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
 
-            // First, send admin notification
-            emailjs.sendForm(SERVICE_ID, ADMIN_TEMPLATE_ID, form)
-                .then(function(adminResponse) {
-                    console.log('Admin email sent!', adminResponse.status, adminResponse.text);
-
-                    // Then, send thank-you to sponsor
-                    const thankYouParams = {
-                        to_email: form.email.value,
-                        name: form.name.value,
-                        sponsorship_type: form.sponsorship_type.value,
-                        amount: form.amount.value,
-                        dedication: form.dedication.value || 'None provided',
-                        preferred_shiur: form['preferred-shiur'].value,
-                        parsha_name: form['parsha-name'] ? form['parsha-name'].value : 'N/A'
-                    };
-
-                    return emailjs.send(SERVICE_ID, THANKYOU_TEMPLATE_ID, thankYouParams);
-                })
-                .then(function(thankYouResponse) {
-                    console.log('Thank-you email sent!', thankYouResponse.status, thankYouResponse.text);
+            // Send form data via EmailJS
+            emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, this)
+                .then(function(response) {
+                    console.log('Success!', response.status, response.text);
                     // Hide form, show thank-you
                     document.getElementById('sponsor-form').style.display = 'none';
                     document.getElementById('thank-you-message').classList.add('show');
-                })
-                .catch(function(error) {
+                }, function(error) {
                     console.log('Error:', error);
                     errorMsg.classList.add('show');
                     submitBtn.disabled = false;
