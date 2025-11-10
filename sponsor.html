@@ -417,8 +417,8 @@
     <script type="text/javascript">
         // Update these: YOUR_USERNAME = your GitHub username, YOUR_REPO = repo name, YOUR_PAT = your PAT
         const USERNAME = 'rabbikraz'; // e.g., your username
-        const REPO = 'rabbikraz.github.io'; // your repo name
-        const PAT = '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'; // Replace with your token
+        const REPO = 'rabbikraz-sponsor'; // your repo name
+        const PAT = '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'; // Your new token
 
         function toggleAmounts() {
             const select = document.getElementById('sponsorship-type');
@@ -474,8 +474,11 @@
             // Collect form data
             const formData = new FormData(this);
             const payload = Object.fromEntries(formData);
+            console.log('Sending payload:', payload); // Log data
+            const dispatchUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/dispatches`;
+            console.log('Dispatch URL:', dispatchUrl); // Log URL
             // Send to GitHub to trigger Action
-            fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/dispatches`, {
+            fetch(dispatchUrl, {
                 method: 'POST',
                 headers: {
                     'Authorization': `token ${PAT}`,
@@ -487,19 +490,23 @@
                     client_payload: payload // Form data as payload
                 })
             })
-            .then(response => {
+            .then(async response => {
+                console.log('Response status:', response.status); // Log status
+                console.log('Response headers:', [...response.headers.entries()]); // Log headers
+                const responseText = await response.text(); // Get raw text
+                console.log('Raw response:', responseText); // Log body
                 if (response.ok) {
                     console.log('Dispatch sent!');
                     // Hide form, show thank-you (client-side optimism)
                     document.getElementById('sponsor-form').style.display = 'none';
                     document.getElementById('thank-you-message').classList.add('show');
                 } else {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    throw new Error(`HTTP ${response.status}: ${response.statusText} - ${responseText}`);
                 }
             })
             .catch(error => {
-                console.log('Error:', error);
-                errorMsg.textContent = 'Network error. Please try again or email rabbikraz1@gmail.com.';
+                console.error('Full error:', error); // Detailed log
+                errorMsg.textContent = `Error: ${error.message}. Check console. Or email rabbikraz1@gmail.com.`;
                 errorMsg.classList.add('show');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Sponsorship';
