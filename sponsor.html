@@ -415,6 +415,11 @@
         <p>&copy; 2025 Rabbi Kraz's Shiurim. All rights reserved. | <a href="#top" class="back-link">Back to Top</a></p>
     </footer>
     <script type="text/javascript">
+        // Update these: YOUR_USERNAME = your GitHub username, YOUR_REPO = repo name, YOUR_PAT = your PAT
+        const USERNAME = 'rabbikraz'; // e.g., your username
+        const REPO = 'rabbikraz-sponsor'; // your repo name
+        const PAT = 'ghp_YOUR_PAT_HERE'; // Replace with your token
+
         function toggleAmounts() {
             const select = document.getElementById('sponsorship-type');
             const container = document.getElementById('amount-container');
@@ -468,29 +473,33 @@
             submitBtn.textContent = 'Sending...';
             // Collect form data
             const formData = new FormData(this);
-            // Send via fetch to PHP
-            fetch('process.php', {
+            const payload = Object.fromEntries(formData);
+            // Send to GitHub to trigger Action
+            fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/dispatches`, {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Authorization': `token ${PAT}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    event_type: 'form_submission',
+                    client_payload: payload // Form data as payload
+                })
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    console.log('Success!', data);
-                    // Hide form, show thank-you
+            .then(response => {
+                if (response.ok) {
+                    console.log('Dispatch sent!');
+                    // Hide form, show thank-you (client-side optimism)
                     document.getElementById('sponsor-form').style.display = 'none';
                     document.getElementById('thank-you-message').classList.add('show');
                 } else {
-                    console.log('Error:', data);
-                    errorMsg.textContent = data.message || 'An unexpected error occurred.';
-                    errorMsg.classList.add('show');
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Submit Sponsorship';
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
             })
             .catch(error => {
-                console.log('Fetch Error:', error);
-                errorMsg.textContent = 'Network error. Please try again.';
+                console.log('Error:', error);
+                errorMsg.textContent = 'Network error. Please try again or email rabbikraz1@gmail.com.';
                 errorMsg.classList.add('show');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Submit Sponsorship';
