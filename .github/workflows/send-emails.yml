@@ -1,0 +1,29 @@
+name: Send Sponsorship Emails
+
+on:
+  repository_dispatch:
+    types: [form_submission]
+
+jobs:
+  send-emails:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo (for templates and script)
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install nodemailer
+
+      - name: Send Emails
+        env:
+          NODE_ENV: production
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
+          ADMIN_EMAIL: 'rabbikraz1@gmail.com'
+          FORM_DATA: ${{ toJson(github.event.client_payload) }}
+        run: node send-emails.js
