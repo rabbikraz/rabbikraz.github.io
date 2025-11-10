@@ -390,14 +390,16 @@
                     <label for="dedication">Dedication Message (Optional)</label>
                     <textarea id="dedication" name="dedication" placeholder="In honor of... / In memory of..."></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="preferred-shiur">Preferred Shiur</label>
-                    <select id="preferred-shiur" name="preferred-shiur" onchange="toggleParshaInput()">
-                        <option value="any">Any Upcoming Shiur</option>
-                        <option value="parsha">Choose a Parsha</option>
-                    </select>
-                    <div class="parsha-input" id="parsha-input">
-                        <input type="text" id="parsha-name" name="parsha-name" placeholder="Enter Parsha Name (e.g., Bereishis)">
+                <div id="preferred-shiur-container" style="display: none;">
+                    <div class="form-group">
+                        <label for="preferred-shiur">Preferred Shiur</label>
+                        <select id="preferred-shiur" name="preferred-shiur" onchange="toggleParshaInput()">
+                            <option value="any">Any Upcoming Shiur</option>
+                            <option value="parsha">Choose a Parsha</option>
+                        </select>
+                        <div class="parsha-input" id="parsha-input">
+                            <input type="text" id="parsha-name" name="parsha-name" placeholder="Enter Parsha Name (e.g., Bereishis)">
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="submit-btn" id="submit-btn">Submit Sponsorship</button>
@@ -412,19 +414,11 @@
     <footer>
         <p>&copy; 2025 Rabbi Kraz's Shiurim. All rights reserved. | <a href="#top" class="back-link">Back to Top</a></p>
     </footer>
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
-        // Your EmailJS keys are now plugged in!
-        const PUBLIC_KEY = 'o8MtNmiYhweLEBJz8';
-        const SERVICE_ID = 'service_metidwd';
-        const TEMPLATE_ID = 'template_h0p4bws';
-
-        emailjs.init(PUBLIC_KEY);
-
         function toggleAmounts() {
             const select = document.getElementById('sponsorship-type');
             const container = document.getElementById('amount-container');
+            const preferredContainer = document.getElementById('preferred-shiur-container');
             if (select.value !== '') {
                 container.classList.add('show');
                 const type = select.value;
@@ -432,17 +426,30 @@
                 document.getElementById('shiur-amounts').classList.toggle('show', type === 'shiur');
                 document.getElementById('amount').value = '';
                 document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+                // Toggle Preferred Shiur based on type
+                if (type === 'shiur') {
+                    preferredContainer.style.display = 'block';
+                } else {
+                    preferredContainer.style.display = 'none';
+                    // Clear parsha if hiding
+                    document.getElementById('preferred-shiur').value = 'any';
+                    document.getElementById('parsha-name').value = '';
+                    document.getElementById('parsha-input').classList.remove('show');
+                }
             } else {
                 container.classList.remove('show');
+                preferredContainer.style.display = 'none';
+                // Clear on reset
+                document.getElementById('preferred-shiur').value = 'any';
+                document.getElementById('parsha-name').value = '';
+                document.getElementById('parsha-input').classList.remove('show');
             }
         }
-
         function selectAmount(value) {
             document.getElementById('amount').value = value;
             document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
             event.target.classList.add('selected');
         }
-
         function toggleParshaInput() {
             const select = document.getElementById('preferred-shiur');
             const input = document.getElementById('parsha-input');
@@ -451,30 +458,43 @@
                 document.getElementById('parsha-name').value = '';
             }
         }
-
         document.getElementById('sponsor-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const submitBtn = document.getElementById('submit-btn');
             const errorMsg = document.getElementById('error-message');
-
             // Hide error, disable button
             errorMsg.classList.remove('show');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
-
-            // Send form data via EmailJS
-            emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, this)
-                .then(function(response) {
-                    console.log('Success!', response.status, response.text);
+            // Collect form data
+            const formData = new FormData(this);
+            // Send via fetch to PHP
+            fetch('process.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Success!', data);
                     // Hide form, show thank-you
                     document.getElementById('sponsor-form').style.display = 'none';
                     document.getElementById('thank-you-message').classList.add('show');
-                }, function(error) {
-                    console.log('Error:', error);
+                } else {
+                    console.log('Error:', data);
+                    errorMsg.textContent = data.message || 'An unexpected error occurred.';
                     errorMsg.classList.add('show');
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Submit Sponsorship';
-                });
+                }
+            })
+            .catch(error => {
+                console.log('Fetch Error:', error);
+                errorMsg.textContent = 'Network error. Please try again.';
+                errorMsg.classList.add('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Sponsorship';
+            });
         });
     </script>
 </body>
