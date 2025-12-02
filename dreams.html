@@ -97,6 +97,39 @@
             box-shadow: var(--shadow);
         }
 
+        .bottom-buttons {
+            padding: 2.5rem 1rem;
+            background: var(--white);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .bottom-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0 1rem;
+            padding: 0.8rem 1.6rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .bottom-buttons a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .bottom-buttons i {
+            font-size: 1.3rem;
+        }
+
         footer {
             background: var(--primary-color);
             color: var(--white);
@@ -112,6 +145,7 @@
             .listen-icons a { font-size: 0.85rem; }
             .listen-icons i, .listen-icons svg { font-size: 1.6rem; width: 1.6rem; height: 1.6rem; }
             .pdf-container iframe { height: 800px; }
+            .bottom-buttons a { display: flex; width: 90%; max-width: 320px; margin: 0.8rem auto; justify-content: center; }
         }
     </style>
 </head>
@@ -181,9 +215,14 @@
         <iframe src="https://drive.google.com/file/d/1OUX3VPOv_ONIFeNMZL5wui4iLkyomnwR/preview" allowfullscreen></iframe>
     </section>
 
+    <div class="bottom-buttons">
+        <a href="https://rabbikraz.com"><i class="fas fa-home"></i> Home</a>
+        <a href="https://chat.whatsapp.com/BdUZM8mzvXuEpgS9MoGN9W"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+        <a href="mailto:rabbikraz1@gmail.com"><i class="fas fa-gift"></i> Sponsor a Shiur</a>
+    </div>
+
     <footer>
-        <p>© 2025 Rabbi Kraz's Shiurim. All rights reserved. | 
-           <a href="index.html">Back to Home</a></p>
+        <p>© 2025 Rabbi Kraz's Shiurim. All rights reserved.</p>
     </footer>
 </body>
 </html>
