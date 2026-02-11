@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kotzk and Lubavitch — Rabbi Kraz's Shiurim</title>
+    
+    <!-- WhatsApp / Social Sharing Preview -->
+    <meta property="og:title" content="Kotzk and Lubavitch — Rabbi Kraz's Shiurim">
+    <meta property="og:description" content="Source sheet and audio for this shiur by Rabbi Kraz">
+    <meta property="og:image" content="https://github.com/rabbikraz/rabbikraz.github.io/raw/4a7448c9395659004a13d66d4c7d7986d2b166bd/Kotzk%20and%20Lubavitch.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://rabbikraz.com/kotzk-lubavitch.html">
+    <meta property="og:type" content="website">
 
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -43,6 +52,45 @@
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
+
+        .listen-now {
+            padding: 2rem 1rem;
+            background: var(--white);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .listen-now h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .listen-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .listen-icons a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
+        }
+
+        .listen-icons a:hover { transform: translateY(-4px); }
+
+        .listen-icons i { font-size: 1.8rem; color: var(--accent-color); margin-bottom: 0.4rem; }
+        .listen-icons svg { width: 1.8rem; height: 1.8rem; margin-bottom: 0.4rem; }
 
         .pdf-container {
             padding: 3rem 1rem;
@@ -103,6 +151,9 @@
         footer a { color: #a0aec0; text-decoration: none; }
 
         @media (max-width: 768px) {
+            .listen-icons { gap: 1rem; }
+            .listen-icons a { font-size: 0.85rem; }
+            .listen-icons i, .listen-icons svg { font-size: 1.6rem; width: 1.6rem; height: 1.6rem; }
             .pdf-container iframe { height: 800px; }
             .bottom-buttons a { display: flex; width: 90%; max-width: 320px; margin: 0.8rem auto; justify-content: center; }
         }
@@ -115,8 +166,62 @@
         <p>Source Sheet • Rabbi Kraz's Shiurim</p>
     </header>
 
+    <section class="listen-now">
+        <h2>Listen Now</h2>
+        <div class="listen-icons">
+            <a href="https://youtu.be/Lo6djqp4igM" target="_blank"><i class="fab fa-youtube"></i>YouTube</a>
+
+            <a href="https://music.youtube.com/watch?v=Lo6djqp4igM" target="_blank">
+                <svg viewBox="0 0 176 176" width="1.8rem" height="1.8rem">
+                    <circle fill="#4a90e2" cx="88" cy="88" r="88"/>
+                    <path fill="#ffffff" d="M88,46c23.1,0,42,18.8,42,42s-18.8,42-42,42s-42-18.8-42-42S64.9,46,88,46 M88,42
+                        c-25.4,0-46,20.6-46,46s20.6,46,46,46s46-20.6,46-46S113.4,42,88,42L88,42z"/>
+                    <polygon fill="#ffffff" points="72,111 111,87 72,65"/>
+                </svg>
+                YT Music
+            </a>
+
+            <a href="https://open.spotify.com/episode/44UmeUTrsj1A22bJ9fjiul?si=YJEpOgWDRdGA7E_jpohSuQ" target="_blank"><i class="fab fa-spotify"></i>Spotify</a>
+            <a href="https://podcasts.apple.com/us/podcast/kotzk-and-lubavitch/id1701685139?i=1000749302620" target="_blank"><i class="fab fa-apple"></i>Apple</a>
+            <a href="https://music.amazon.com/podcasts/f0e647ec-80d9-4224-961c-a7c1f9c52a1e/episodes/30bbbc7c-fbb5-4dd7-b2aa-23d7b4e58e4b/rabbi-kraz's-shiurim-kotzk-and-lubavitch" target="_blank"><i class="fab fa-amazon"></i>Amazon</a>
+
+            <a href="https://pca.st/l0hjf7n0" target="_blank">
+                <svg viewBox="0 0 32 32" width="1.8rem" height="1.8rem">
+                    <circle cx="16" cy="15" r="15" fill="white"/>
+                    <path fill="#4a90e2" fill-rule="evenodd" clip-rule="evenodd" d="M16 32c8.837 0 16-7.163 16-16S24.837 0 16 0 0 7.163 0 16s7.163 16 16 16Zm0-28.444C9.127 3.556 3.556 9.127 3.556 16c0 6.873 5.571 12.444 12.444 12.444v-3.11A9.333 9.333 0 1 1 25.333 16h3.111c0-6.874-5.571-12.445-12.444-12.445ZM8.533 16A7.467 7.467 0 0 0 16 23.467v-2.715A4.751 4.751 0 1 1 20.752 16h2.715a7.467 7.467 0 0 0-14.934 0Z"/>
+                </svg>
+                Pocket
+            </a>
+
+            <a href="https://castbox.fm/vi/902302098" target="_blank">
+                <svg width="1.8rem" height="1.8rem" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#4a90e2" d="M396,512H116C51.93,512,0,460.07,0,396V116C0,51.93,51.93,0,116,0h280c64.07,0,116,51.93,116,116v280
+                        C512,460.07,460.07,512,396,512z"/>
+                    <g>
+                        <path fill="#ffffff" d="M284.36,172.15c-9.5,0-17.22,7.32-17.22,16.35v39.56c0,5-4.63,9.05-10.33,9.05
+                            c-5.71,0-10.34-4.05-10.34-9.05v-53.82c0-9.04-7.71-16.36-17.22-16.36c-9.51,0-17.22,7.32-17.22,16.36v43.14
+                            c0,4.99-4.63,9.05-10.34,9.05c-5.7,0-10.33-4.06-10.33-9.05v-15.63c0-9.03-7.72-16.35-17.22-16.35c-9.51,0-17.22,7.32-17.22,16.35
+                            v37.01c0,4.99-4.63,9.05-10.34,9.05c-5.7,0-10.33-4.06-10.33-9.05v-4.3c0-9.45-7.71-17.11-17.22-17.11
+                            c-9.51,0-17.22,7.66-17.22,17.11v51.37c0,9.45,7.7,17.12,17.22,17.12c9.5,0,17.22-7.67,17.22-17.12v-4.3
+                            c0-4.99,4.63-9.05,10.33-9.05c5.71,0,10.34,4.06,10.34,9.05v58.72c0,9.03,7.7,16.36,17.22,16.36c9.5,0,17.22-7.33,17.22-16.36
+                            v-80.1c0-4.99,4.63-9.05,10.33-9.05c5.71,0,10.34,4.06,10.34,9.05v40.35c0,9.04,7.7,16.36,17.22,16.36
+                            c9.5,0,17.22-7.32,17.22-16.36v-29.67c0-4.99,4.63-9.05,10.34-9.05c5.7,0,10.33,4.06,10.33,9.05v31.71
+                            c0,9.03,7.71,16.35,17.22,16.35c9.51,0,17.22-7.32,17.22-16.35V188.5C301.58,179.47,293.88,172.15,284.36,172.15"/>
+                        <path fill="#ffffff" d="M339.46,216.33c-9.51,0-17.22,7.32-17.22,16.35v65.13c0,9.03,7.7,16.35,17.22,16.35
+                            c9.5,0,17.22-7.32,17.22-16.35v-65.13C356.68,223.65,348.97,216.33,339.46,216.33"/>
+                        <path fill="#ffffff" d="M394.56,249.45c-9.5,0-17.22,7.32-17.22,16.35v16.21c0,9.03,7.71,16.35,17.22,16.35
+                            c9.51,0,17.22-7.32,17.22-16.35V265.8C411.78,256.77,404.08,249.45,394.56,249.45"/>
+                    </g>
+                </svg>
+                Castbox
+            </a>
+
+            <a href="https://24six.app/preview/podcast/collection/11014/rabbi-krazs-shiurim" target="_blank"><i class="fas fa-mobile-alt"></i>24Six</a>
+        </div>
+    </section>
+
     <section class="pdf-container">
-        <iframe src="https://drive.google.com/file/d/12KkSmdCBCMmgE-pI8s5gX8tcM7ELmU1D/preview" allowfullscreen></iframe>
+        <iframe src="https://drive.google.com/file/d/1a4EqZVi8TWwdJu5y2BqxWR1hHC34huRD/preview" allowfullscreen></iframe>
     </section>
 
     <div class="bottom-buttons">
