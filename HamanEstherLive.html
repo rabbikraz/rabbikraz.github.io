@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kotzk and Lubavitch — Rabbi Kraz's Shiurim</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2d5aa0;
+            --accent-color: #4a90e2;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background-color: var(--bg-light);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .youtube-live {
+            padding: 2rem 1rem;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .youtube-live iframe {
+            width: 100%;
+            max-width: 900px;
+            height: 506px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .pdf-container {
+            padding: 3rem 1rem;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            max-width: 900px;
+            height: 1000px;
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .bottom-buttons {
+            padding: 2.5rem 1rem;
+            background: var(--white);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .bottom-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin: 0 1rem;
+            padding: 0.8rem 1.6rem;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .bottom-buttons a:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .bottom-buttons i {
+            font-size: 1.3rem;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        footer a { color: #a0aec0; text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .youtube-live iframe { height: 315px; }
+            .pdf-container iframe { height: 800px; }
+            .bottom-buttons a { display: flex; width: 90%; max-width: 320px; margin: 0.8rem auto; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Haman's Promiscuous Reverie Over Esther</h1>
+        <p>Source Sheet • Rabbi Kraz's Shiurim</p>
+    </header>
+
+    <section class="youtube-live">
+        <iframe src="https://www.youtube.com/embed/m23qRNzoIM4" 
+                title="YouTube live stream" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+    </section>
+
+    <section class="pdf-container">
+        <iframe src="https://drive.google.com/file/d/1a4EqZVi8TWwdJu5y2BqxWR1hHC34huRD/preview" allowfullscreen></iframe>
+    </section>
+
+    <div class="bottom-buttons">
+        <a href="https://rabbikraz.com"><i class="fas fa-home"></i> Home</a>
+        <a href="https://chat.whatsapp.com/BdUZM8mzvXuEpgS9MoGN9W"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+        <a href="mailto:rabbikraz1@gmail.com"><i class="fas fa-gift"></i> Sponsor a Shiur</a>
+    </div>
+
+    <footer>
+        <p>© 2025 Rabbi Kraz's Shiurim. All rights reserved.</p>
+    </footer>
+</body>
+</html>
