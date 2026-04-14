@@ -77,6 +77,34 @@
             margin-top: 1rem;
         }
 
+        /* --- SPONSOR BUTTON --- */
+        .top-sponsor {
+            margin-top: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .top-sponsor-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 2rem;
+            background: var(--accent);
+            color: var(--card-bg);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-gold);
+            border: 1px solid var(--accent);
+        }
+
+        .top-sponsor-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+        }
+
         /* --- LISTEN SECTION --- */
         .listen-section {
             padding: 5rem 1.5rem;
@@ -259,6 +287,7 @@
             
             header h1 { font-size: 2rem; }
             header p { font-size: 0.9rem; letter-spacing: 2px; }
+            .top-sponsor-btn { font-size: 1rem; padding: 0.6rem 1.5rem; }
             .section-title { font-size: 1.9rem; margin-bottom: 2rem; }
 
             .listen-icons { gap: 1rem; }
@@ -278,6 +307,9 @@
     <header>
         <h1>The Maharam of Rottenburg is Captured! Let's Release Him!</h1>
         <p>Source Sheet • Rabbi Kraz's Shiurim</p>
+        <div class="top-sponsor">
+            <a href="https://rabbikraz.com/sponsor" class="top-sponsor-btn"><i class="fas fa-gift"></i> Sponsor This Shiur</a>
+        </div>
     </header>
 
     <section class="listen-section">
@@ -355,7 +387,8 @@
                 <div class="icon-wrapper">
                     <svg viewBox="0 0 100 100">
                         <circle cx="50" cy="50" r="45" fill="var(--card-bg)" stroke="currentColor" stroke-width="6"/>
-                        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-weight="700" font-size="28px" fill="currentColor">24/6</text>
+                        <path fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" d="M30 40c0-10 20-10 20 0v20c0 10-20 10-20 0M70 40c0-10 20-10 20 0v20c0 10-20 10-20 0M50 30v40" />
+                        <path fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" d="M30 65s5-8 20-8 20 8 20 8v10H30z" />
                     </svg>
                 </div>
                 24Six
