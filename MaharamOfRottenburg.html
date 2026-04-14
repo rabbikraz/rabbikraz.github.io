@@ -104,18 +104,70 @@
             background: var(--accent);
         }
 
-        /* Responsive YouTube Embed Container */
-        .video-wrapper {
+        /* Collapsible Video Container */
+        details.video-accordion {
             max-width: 900px;
             margin: 0 auto;
+            background: var(--card-bg);
             border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.06);
             overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+
+        details.video-accordion:hover {
             box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(0,0,0,0.08);
-            background: var(--primary);
+        }
+
+        details.video-accordion summary {
+            padding: 1.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none; /* Hides default triangle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            background: var(--card-bg);
+            transition: background 0.3s ease;
+        }
+
+        /* Hides default triangle in webkit browsers */
+        details.video-accordion summary::-webkit-details-marker {
+            display: none; 
+        }
+
+        details.video-accordion summary:hover {
+            background: var(--bg-light);
+        }
+
+        details.video-accordion summary .fa-youtube {
+            color: #ff0000; /* YouTube Red for pop */
+            font-size: 2rem;
+        }
+
+        details.video-accordion summary .fa-chevron-down {
+            color: var(--accent);
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Flip arrow when open */
+        details.video-accordion[open] summary .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+
+        /* Responsive YouTube Embed inside details */
+        .video-wrapper {
             position: relative;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #000; /* Black background for video */
         }
 
         .video-wrapper iframe {
@@ -232,6 +284,10 @@
             header p { font-size: 0.9rem; letter-spacing: 2px; }
             .section-title { font-size: 1.9rem; margin-bottom: 2rem; }
             
+            /* Accordion Mobile Adjustments */
+            details.video-accordion summary { padding: 1.2rem 1rem; font-size: 1.4rem; gap: 0.75rem; }
+            details.video-accordion summary .fa-youtube { font-size: 1.6rem; }
+
             /* PDF Tighter View on Mobile */
             .pdf-wrapper iframe { height: 70vh; }
             
@@ -251,15 +307,23 @@
     <section class="video-section">
         <h2 class="section-title">Watch Shiur</h2>
         
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/2iMAq1_Dr1U" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allowfullscreen>
-            </iframe>
-        </div>
+        <details class="video-accordion">
+            <summary>
+                <i class="fab fa-youtube"></i>
+                Click to Watch Video
+                <i class="fas fa-chevron-down"></i>
+            </summary>
+            
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/2iMAq1_Dr1U" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </details>
         
     </section>
 
