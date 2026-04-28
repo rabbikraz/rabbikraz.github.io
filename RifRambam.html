@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Did The Rif And The Rambam See Eye To Eye? — Rabbi Kraz's Shiurim</title>
+    
+    <meta property="og:title" content="Did The Rif And The Rambam See Eye To Eye? — Rabbi Kraz's Shiurim">
+    <meta property="og:description" content="Source sheet and audio for this shiur by Rabbi Kraz">
+    <meta property="og:image" content="https://raw.githubusercontent.com/rabbikraz/rabbikraz.github.io/refs/heads/Master/RifRambam.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://rabbikraz.com/">
+    <meta property="og:type" content="website">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Elegant Color Palette */
+            --primary: #0f172a;       /* Deep Slate / Midnight */
+            --secondary: #1e293b;     /* Lighter Slate */
+            --accent: #d4af37;        /* Metallic Gold */
+            --accent-hover: #b5952f;  /* Darker Gold */
+            --bg-light: #fdfbf7;      /* Warm Off-White */
+            --card-bg: #ffffff;       /* Pure White */
+            --text-main: #334155;     /* Soft Dark Grey for readability */
+            --text-muted: #64748b;
+            
+            --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.08);
+            --shadow-gold: 0 10px 25px rgba(212, 175, 55, 0.25);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--card-bg);
+            text-align: center;
+            padding: 5rem 1.5rem 4rem;
+            position: relative;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.2;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header p {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* --- SPONSOR CARD --- */
+        .sponsor-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.75rem 2rem;
+            max-width: 750px;
+            margin: 2.5rem auto 0;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .sponsor-card h3 {
+            color: var(--accent);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .sponsor-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .sponsor-card li {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .sponsor-card li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.9rem;
+            top: 3px;
+        }
+
+        .sponsor-card li strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* --- LISTEN SECTION --- */
+        .listen-section {
+            padding: 5rem 1.5rem;
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .listen-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .listen-icons a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            gap: 0.75rem;
+        }
+
+        .listen-icons a:hover {
+            transform: translateY(-6px);
+        }
+
+        .listen-icons .icon-wrapper {
+            width: 75px;
+            height: 75px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: currentColor;
+            font-size: 2rem;
+            border: 1px solid rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .listen-icons .icon-wrapper svg {
+            width: 34px;
+            height: 34px;
+            fill: currentColor;
+        }
+
+        /* Adjusting for 24Six tall aspect ratio */
+        .listen-icons .icon-wrapper .tall-svg {
+            width: auto;
+            height: 36px;
+        }
+
+        .listen-icons a:hover .icon-wrapper {
+            box-shadow: var(--shadow-gold);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* --- PDF SECTION --- */
+        .pdf-section {
+            padding: 4rem 1.5rem;
+            background: var(--card-bg);
+            text-align: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .pdf-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,0.08);
+            background: var(--bg-light);
+        }
+
+        .pdf-wrapper iframe {
+            width: 100%;
+            height: 900px;
+            border: none;
+            display: block;
+        }
+
+        /* --- BOTTOM BUTTONS --- */
+        .bottom-buttons {
+            padding: 5rem 1.5rem;
+            background: var(--bg-light);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .btn i { font-size: 1.2rem; }
+
+        .btn:hover {
+            background: var(--primary);
+            color: var(--card-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
+            border-color: var(--primary);
+        }
+
+        .btn.btn-gold {
+            background: var(--accent);
+            color: var(--card-bg);
+            border-color: var(--accent);
+        }
+
+        .btn.btn-gold:hover {
+            background: var(--accent-hover);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--accent-hover);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 3rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- ANIMATIONS & MEDIA QUERIES --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 3rem 1rem 2.5rem; }
+            .listen-section, .bottom-buttons { padding: 2.5rem 1rem; }
+            .pdf-section { padding: 2rem 1rem; }
+            
+            header h1 { font-size: 2rem; }
+            header p { font-size: 0.9rem; letter-spacing: 2px; }
+            
+            .sponsor-card { padding: 1.25rem 1rem; margin: 2rem 0 0; border-radius: 8px; }
+            .sponsor-card h3 { font-size: 1.3rem; }
+            .sponsor-card li { font-size: 0.95rem; }
+
+            .section-title { font-size: 1.9rem; margin-bottom: 2rem; }
+
+            .listen-icons { gap: 1rem; }
+            .listen-icons a { font-size: 0.8rem; gap: 0.5rem; }
+            .listen-icons .icon-wrapper { width: 60px; height: 60px; font-size: 1.6rem; }
+            .listen-icons .icon-wrapper svg { width: 26px; height: 26px; }
+            .listen-icons .icon-wrapper .tall-svg { height: 28px; width: auto; }
+            
+            .pdf-wrapper iframe { height: 70vh; }
+            
+            .bottom-buttons { gap: 0.75rem; }
+            .btn { width: 100%; max-width: 320px; justify-content: center; padding: 0.8rem 1.5rem; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Did The Rif And The Rambam See Eye To Eye?</h1>
+        <p>Source Sheet • Rabbi Kraz's Shiurim</p>
+        
+        <div class="sponsor-card">
+            <h3>Co-sponsored by:</h3>
+            <ul>
+                <li><strong>Moshe Krasnjansky:</strong> In Honor of my Yom huledes and refuah shleima for מושקא בת יוכבד שפרה ובת שבע בת יוכבד שפרה</li>
+                <li><strong>Dovid Cohen:</strong> In Honor of Yehuda Cohen</li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="listen-section">
+        <h2 class="section-title">Listen Now</h2>
+        <div class="listen-icons">
+            
+            <a href="https://youtu.be/Ad1TuApQOHc" target="_blank">
+                <div class="icon-wrapper"><i class="fab fa-youtube"></i></div>
+                YouTube
+            </a>
+
+            <a href="https://music.youtube.com/podcast/Ad1TuApQOHc" target="_blank">
+                <div class="icon-wrapper">
+                    <svg viewBox="0 0 176 176">
+                        <circle fill="currentColor" cx="88" cy="88" r="88"/>
+                        <path fill="var(--card-bg)" d="M88,46c23.1,0,42,18.8,42,42s-18.8,42-42,42s-42-18.8-42-42S64.9,46,88,46 M88,42
+                            c-25.4,0-46,20.6-46,46s20.6,46,46,46s46-20.6,46-46S113.4,42,88,42L88,42z"/>
+                        <polygon fill="var(--card-bg)" points="72,111 111,87 72,65"/>
+                    </svg>
+                </div>
+                YT Music
+            </a>
+
+            <a href="https://open.spotify.com/episode/0SxDZR59OhPacE7reAaR0i" target="_blank">
+                <div class="icon-wrapper"><i class="fab fa-spotify"></i></div>
+                Spotify
+            </a>
+
+            <a href="https://podcasts.apple.com/us/podcast/did-the-rif-and-the-rambam-see-eye-to-eye/id1701685139?i=1000764123379" target="_blank">
+                <div class="icon-wrapper"><i class="fab fa-apple"></i></div>
+                Apple
+            </a>
+
+            <a href="https://music.amazon.com/podcasts/f0e647ec-80d9-4224-961c-a7c1f9c52a1e/episodes/0c4e2095-5c12-43c0-b759-2ad3ca47ecb2/rabbi-kraz's-shiurim-did-the-rif-and-the-rambam-see-eye-to-eye" target="_blank">
+                <div class="icon-wrapper"><i class="fab fa-amazon"></i></div>
+                Amazon
+            </a>
+
+            <a href="https://pca.st/7phhqgpn" target="_blank">
+                <div class="icon-wrapper">
+                    <svg viewBox="0 0 32 32">
+                        <circle cx="16" cy="15" r="15" fill="var(--card-bg)"/>
+                        <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16 32c8.837 0 16-7.163 16-16S24.837 0 16 0 0 7.163 0 16s7.163 16 16 16Zm0-28.444C9.127 3.556 3.556 9.127 3.556 16c0 6.873 5.571 12.444 12.444 12.444v-3.11A9.333 9.333 0 1 1 25.333 16h3.111c0-6.874-5.571-12.445-12.444-12.445ZM8.533 16A7.467 7.467 0 0 0 16 23.467v-2.715A4.751 4.751 0 1 1 20.752 16h2.715a7.467 7.467 0 0 0-14.934 0Z"/>
+                    </svg>
+                </div>
+                Pocket
+            </a>
+
+            <a href="https://castbox.fm/vi/937949720" target="_blank">
+                <div class="icon-wrapper">
+                    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="currentColor" d="M396,512H116C51.93,512,0,460.07,0,396V116C0,51.93,51.93,0,116,0h280c64.07,0,116,51.93,116,116v280
+                            C512,460.07,460.07,512,396,512z"/>
+                        <g fill="var(--card-bg)">
+                            <path d="M284.36,172.15c-9.5,0-17.22,7.32-17.22,16.35v39.56c0,5-4.63,9.05-10.33,9.05
+                                c-5.71,0-10.34-4.05-10.34-9.05v-53.82c0-9.04-7.71-16.36-17.22-16.36c-9.51,0-17.22,7.32-17.22,16.36v43.14
+                                c0,4.99-4.63,9.05-10.34,9.05c-5.7,0-10.33-4.06-10.33-9.05v-15.63c0-9.03-7.72-16.35-17.22-16.35c-9.51,0-17.22,7.32-17.22,16.35
+                                v37.01c0,4.99-4.63,9.05-10.34,9.05c-5.7,0-10.33-4.06-10.33-9.05v-4.3c0-9.45-7.71-17.11-17.22-17.11
+                                c-9.51,0-17.22,7.66-17.22,17.11v51.37c0,9.45,7.7,17.12,17.22,17.12c9.5,0,17.22-7.67,17.22-17.12v-4.3
+                                c0-4.99,4.63-9.05,10.33-9.05c5.71,0,10.34,4.06,10.34,9.05v58.72c0,9.03,7.7,16.36,17.22,16.36c9.5,0,17.22-7.33,17.22-16.36
+                                v-80.1c0-4.99,4.63-9.05,10.33-9.05c5.71,0,10.34,4.06,10.34,9.05v40.35c0,9.04,7.7,16.36,17.22,16.36
+                                c9.5,0,17.22-7.32,17.22-16.36v-29.67c0-4.99,4.63-9.05,10.34-9.05c5.7,0,10.33,4.06,10.33,9.05v31.71
+                                c0,9.03,7.71,16.35,17.22,16.35c9.51,0,17.22-7.32-17.22-16.35V188.5C301.58,179.47,293.88,172.15,284.36,172.15"/>
+                            <path d="M339.46,216.33c-9.51,0-17.22,7.32-17.22,16.35v65.13c0,9.03,7.7,16.35,17.22,16.35
+                                c9.5,0,17.22-7.32,17.22-16.35v-65.13C356.68,223.65,348.97,216.33,339.46,216.33"/>
+                            <path d="M394.56,249.45c-9.5,0-17.22,7.32-17.22,16.35v16.21c0,9.03,7.71,16.35,17.22,16.35
+                                c9.51,0,17.22-7.32,17.22-16.35V265.8C411.78,256.77,404.08,249.45,394.56,249.45"/>
+                        </g>
+                    </svg>
+                </div>
+                Castbox
+            </a>
+            
+            <a href="https://24six.app/preview/podcast/collection/11014/rabbi-krazs-shiurim" target="_blank">
+                <div class="icon-wrapper">
+                    <svg class="tall-svg" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M52.5558 22.5998L20.9208 1.82678C18.7995 0.627795 16.4008 0.00612166 13.9642 0.0238045C11.5276 0.0414873 9.13817 0.697907 7.03448 1.92755C4.9308 3.1572 3.18639 4.91707 1.97535 7.03153C0.764319 9.14598 0.129009 11.5411 0.13283 13.9778V55.5218C0.129185 57.9584 0.764621 60.3534 1.97573 62.4677C3.18683 64.582 4.93126 66.3417 7.03492 67.5713C9.13857 68.8008 11.5279 69.4571 13.9645 69.4748C16.401 69.4924 18.7996 68.8707 20.9208 67.6718L52.5558 46.8998C54.7039 45.6808 56.4904 43.9141 57.7333 41.7797C58.9762 39.6454 59.631 37.2197 59.631 34.7498C59.631 32.2799 58.9762 29.8542 57.7333 27.7198C56.4904 25.5855 54.7039 23.8188 52.5558 22.5998ZM20.6328 55.7498C20.6328 57.54 19.9217 59.2569 18.6558 60.5228C17.3899 61.7886 15.673 62.4998 13.8828 62.4998C12.0926 62.4998 10.3757 61.7886 9.10986 60.5228C7.84399 59.2569 7.13283 57.54 7.13283 55.7498V22.9998H14.6328C16.2241 22.9998 17.7503 23.6319 18.8755 24.7571C20.0007 25.8824 20.6328 27.4085 20.6328 28.9998V55.7498ZM13.8828 20.4998C12.5478 20.4998 11.2428 20.1039 10.1327 19.3622C9.0227 18.6205 8.15753 17.5663 7.64664 16.3329C7.13575 15.0995 7.00208 13.7423 7.26253 12.4329C7.52298 11.1235 8.16585 9.92081 9.10986 8.97681C10.0539 8.03281 11.2566 7.38993 12.566 7.12948C13.8753 6.86903 15.2325 7.0027 16.4659 7.51359C17.6993 8.02449 18.7536 8.88965 19.4953 9.99968C20.2369 11.1097 20.6328 12.4148 20.6328 13.7498C20.6328 15.54 19.9217 17.2569 18.6558 18.5228C17.3899 19.7886 15.673 20.4998 13.8828 20.4998ZM36.6328 45.2498C36.6328 47.04 35.9217 48.7569 34.6558 50.0228C33.3899 51.2886 31.673 51.9998 29.8828 51.9998C28.0926 51.9998 26.3757 51.2886 25.1099 50.0228C23.844 48.7569 23.1328 47.04 23.1328 45.2498V39.4998C23.1328 37.9085 23.765 36.3824 24.8902 35.2571C26.0154 34.1319 27.5415 33.4998 29.1328 33.4998H36.6328V45.2498ZM29.8828 30.9998C28.5478 30.9998 27.2428 30.6039 26.1327 29.8622C25.0227 29.1205 24.1575 28.0663 23.6466 26.8329C23.1358 25.5995 23.0021 24.2423 23.2625 22.9329C23.523 21.6235 24.1659 20.4208 25.1099 19.4768C26.0539 18.5328 27.2566 17.8899 28.566 17.6295C29.8753 17.369 31.2325 17.5027 32.4659 18.0136C33.6993 18.5245 34.7535 19.3897 35.4952 20.4997C36.2369 21.6097 36.6328 22.9148 36.6328 24.2498C36.6328 26.04 35.9217 27.7569 34.6558 29.0228C33.3899 30.2886 31.673 30.9998 29.8828 30.9998ZM45.8828 41.4998C44.5478 41.4998 43.2428 41.1039 42.1327 40.3622C41.0227 39.6205 40.1575 38.5663 39.6466 37.3329C39.1357 36.0995 39.0021 34.7423 39.2625 33.4329C39.523 32.1236 40.1659 30.9208 41.1099 29.9768C42.0539 29.0328 43.2566 28.3899 44.566 28.1295C45.8753 27.869 47.2325 28.0027 48.4659 28.5136C49.6993 29.0245 50.7535 29.8897 51.4952 30.9997C52.2369 32.1097 52.6328 33.4148 52.6328 34.7498C52.6328 36.54 51.9217 38.2569 50.6558 39.5228C49.3899 40.7886 47.673 41.4998 45.8828 41.4998Z" fill="currentColor"/>
+                    </svg>
+                </div>
+                24Six
+            </a>
+
+        </div>
+    </section>
+
+    <section class="pdf-section">
+        <h2 class="section-title">Source Sheet</h2>
+        <div class="pdf-wrapper">
+            <iframe src="https://drive.google.com/file/d/1JYsoF8kZW4nMnrmdJQNWjhia13iuxBgw/preview" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <div class="bottom-buttons">
+        <a href="https://rabbikraz.com" class="btn"><i class="fas fa-home"></i> Home</a>
+        <a href="https://chat.whatsapp.com/BdUZM8mzvXuEpgS9MoGN9W" class="btn"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+        <a href="https://rabbikraz.com/sponsor" class="btn btn-gold"><i class="fas fa-gift"></i> Sponsor a Shiur</a>
+    </div>
+
+    <footer>
+        <p>© 2026 Rabbi Kraz's Shiurim. All rights reserved.</p>
+    </footer>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Did The Rif And The Rambam See Eye To Eye? — Rabbi Kraz's Shiurim</title>
+    
+    <meta property="og:title" content="Did The Rif And The Rambam See Eye To Eye? — Rabbi Kraz's Shiurim">
+    <meta property="og:description" content="Source sheet and audio for this shiur by Rabbi Kraz">
+    <meta property="og:image" content="https://raw.githubusercontent.com/rabbikraz/rabbikraz.github.io/refs/heads/Master/RifRambam.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://rabbikraz.com/">
+    <meta property="og:type" content="website">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Elegant Color Palette */
+            --primary: #0f172a;       /* Deep Slate / Midnight */
+            --secondary: #1e293b;     /* Lighter Slate */
+            --accent: #d4af37;        /* Metallic Gold */
+            --accent-hover: #b5952f;  /* Darker Gold */
+            --bg-light: #fdfbf7;      /* Warm Off-White */
+            --card-bg: #ffffff;       /* Pure White */
+            --text-main: #334155;     /* Soft Dark Grey for readability */
+            --text-muted: #64748b;
+            
+            --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.08);
+            --shadow-gold: 0 10px 25px rgba(212, 175, 55, 0.25);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--card-bg);
+            text-align: center;
+            padding: 5rem 1.5rem 4rem;
+            position: relative;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.2;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header p {
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 1rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* --- SPONSOR CARD --- */
+        .sponsor-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.75rem 2rem;
+            max-width: 750px;
+            margin: 2.5rem auto 0;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .sponsor-card h3 {
+            color: var(--accent);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .sponsor-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .sponsor-card li {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .sponsor-card li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.9rem;
+            top: 3px;
+        }
+
+        .sponsor-card li strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* --- LISTEN SECTION --- */
+        .listen-section {
+            padding: 5rem 1.5rem;
+            background: var(--bg-light);
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .listen-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .listen-icons a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+            gap: 0.75rem;
+        }
+
+        .listen-icons a:hover {
+            transform: translateY(-6px);
+        }
+
+        .listen-icons .icon-wrapper {
+            width: 75px;
+            height: 75px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: currentColor;
+            font-size: 2rem;
+            border: 1px solid rgba(0,0,0,0.03);
+            overflow: hidden;
+        }
+
+        .listen-icons .icon-wrapper svg {
+            width: 34px;
+            height: 34px;
+            fill: currentColor;
+        }
+
+        /* Adjusting for 24Six tall aspect ratio */
+        .listen-icons .icon-wrapper .tall-svg {
+            width: auto;
+            height: 36px;
+        }
+
+        .listen-icons a:hover .icon-wrapper {
+            box-shadow: var(--shadow-gold);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* --- PDF SECTION --- */
+        .pdf-section {
+            padding: 4rem 1.5rem;
+            background: var(--card-bg);
+            text-align: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .pdf-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(0,0,0,0.08);
+            background: var(--bg-light);
+        }
+
+        .pdf-wrapper iframe {
+            width: 100%;
+            height: 900px;
+            border: none;
+            display: block;
+        }
+
+        /* --- BOTTOM BUTTONS --- */
+        .bottom-buttons {
+            padding: 5rem 1.5rem;
+            background: var(--bg-light);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--card-bg);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .btn i { font-size: 1.2rem; }
+
+        .btn:hover {
+            background: var(--primary);
+            color: var(--card-bg);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
+            border-color: var(--primary);
+        }
+
+        .btn.btn-gold {
+            background: var(--accent);
+            color: var(--card-bg);
+            border-color: var(--accent);
+        }
+
+        .btn.btn-gold:hover {
+            background: var(--accent-hover);
+            box-shadow: var(--shadow-gold);
+            border-color: var(--accent-hover);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary);
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 3rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- ANIMATIONS & MEDIA QUERIES --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 3rem 1rem 2.5rem; }
+            .listen-section, .bottom-buttons { padding: 2.5rem 1rem; }
+            .pdf-section { padding: 2rem 1rem; }
+            
+            header h1 { font-size: 2rem; }
+            header p { font-size: 0.9rem; letter-spacing: 2px; }
+            
+            .sponsor-card { padding: 1.25rem 1rem; margin: 2rem 0 0; border-radius: 8px; }
+            .sponsor-card h3 { font-size: 1.3rem; }
+            .sponsor-card li { font-size: 0.95rem; }
+
+            .section-title { font-size: 1.9rem; margin-bottom: 2rem; }
+
+            .listen-icons { gap: 1rem; }
+            .listen-icons a { font-size: 0.8rem; gap: 0.5rem; }
+            .listen-icons .icon-wrapper { width: 60px; height: 60px; font-size: 1.6rem; }
+            .listen-icons .icon-wrapper svg { width: 26px; height: 26px; }
+            .listen-icons .icon-wrapper .tall-svg { height: 28px; width: auto; }
+            
+            .pdf-wrapper iframe { height: 70vh; }
+            
+            .bottom-buttons { gap: 0.75rem; }
+            .btn { width: 100%; max-width: 320px; justify-content: center; padding: 0.8rem 1.5rem; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Did The Rif And The Rambam See Eye To Eye?</h1>
+        <p>Source Sheet • Rabbi Kraz's Shiurim</p>
+        
+        <div class="sponsor-card">
+            <h3>Co-sponsored by:</h3>
+            <ul>
+                <li><strong>Moshe Krasnjansky:</strong> In Honor of my Yom huledes and refuah shleima for מושקא בת יוכבד שפרה ובת שבע בת יוכבד שפרה</li>
+                <li><strong>Dovid Cohen:</strong> In Honor of Yehuda Cohen</li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="listen-section">
+        <h2 class="section-title">Listen Now</h2>
+        <div class="listen-icons">
+            
+            <a href="https://youtu.be/Ad1TuApQOHc" target="_blank">
+                <div class="icon-wrapper"><i class="fab fa-youtube"></i></div>
+                YouTube
+            </a>
+
+            <a href="https://music.youtube.com/podcast/Ad1TuApQOHc" target="_blank">
+                <div class="icon-wrapper">
+                    <svg viewBox="0 0 176 176">
+                        <circle fill="currentColor" cx="88" cy="88" r="88"/>
+                        <path fill="var(--card-bg)" d="M88,46c23.1,0,42,18.8,42,42s-18.8,42-42,42s-42-18.8-42-42S64.9,46,88,46 M88,42
+                            c-25.4,0-46,20.6-46,46s20.6,46,46,46s46-20.6,46-46S113.4,42,88,42L88,42z"/>
+                        <polygon fill="var(--card-bg)" points="72,111 111,87 72,65"/>
+                    </svg>
+                </div>
+                YT Music
+            </a>
+
+            <a href="https://open.spotify.com/episode/0SxDZR59OhPacE7reAaR0i" target="_blank">
+                <div class="icon-wrapper"><i class="fab fa-spotify"></i></div>
+                Spotify
+            </a>
+
+            <a href="https://podcasts.apple.com/us/podcast/did-the-rif-and-the-rambam-see-eye-to-eye/id1701685139?i=1000764123379" target="_blank">
+                <div class="icon-wrapper"><i class="fab fa-apple"></i></div>
+                Apple
+            </a>
+
+            <a href="https://music.amazon.com/podcasts/f0e647ec-80d9-4224-961c-a7c1f9c52a1e/episodes/0c4e2095-5c12-43c0-b759-2ad3ca47ecb2/rabbi-kraz's-shiurim-did-the-rif-and-the-rambam-see-eye-to-eye" target="_blank">
+                <div class="icon-wrapper"><i class="fab fa-amazon"></i></div>
+                Amazon
+            </a>
+
+            <a href="https://pca.st/7phhqgpn" target="_blank">
+                <div class="icon-wrapper">
+                    <svg viewBox="0 0 32 32">
+                        <circle cx="16" cy="15" r="15" fill="var(--card-bg)"/>
+                        <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M16 32c8.837 0 16-7.163 16-16S24.837 0 16 0 0 7.163 0 16s7.163 16 16 16Zm0-28.444C9.127 3.556 3.556 9.127 3.556 16c0 6.873 5.571 12.444 12.444 12.444v-3.11A9.333 9.333 0 1 1 25.333 16h3.111c0-6.874-5.571-12.445-12.444-12.445ZM8.533 16A7.467 7.467 0 0 0 16 23.467v-2.715A4.751 4.751 0 1 1 20.752 16h2.715a7.467 7.467 0 0 0-14.934 0Z"/>
+                    </svg>
+                </div>
+                Pocket
+            </a>
+
+            <a href="https://castbox.fm/vi/937949720" target="_blank">
+                <div class="icon-wrapper">
+                    <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="currentColor" d="M396,512H116C51.93,512,0,460.07,0,396V116C0,51.93,51.93,0,116,0h280c64.07,0,116,51.93,116,116v280
+                            C512,460.07,460.07,512,396,512z"/>
+                        <g fill="var(--card-bg)">
+                            <path d="M284.36,172.15c-9.5,0-17.22,7.32-17.22,16.35v39.56c0,5-4.63,9.05-10.33,9.05
+                                c-5.71,0-10.34-4.05-10.34-9.05v-53.82c0-9.04-7.71-16.36-17.22-16.36c-9.51,0-17.22,7.32-17.22,16.36v43.14
+                                c0,4.99-4.63,9.05-10.34,9.05c-5.7,0-10.33-4.06-10.33-9.05v-15.63c0-9.03-7.72-16.35-17.22-16.35c-9.51,0-17.22,7.32-17.22,16.35
+                                v37.01c0,4.99-4.63,9.05-10.34,9.05c-5.7,0-10.33-4.06-10.33-9.05v-4.3c0-9.45-7.71-17.11-17.22-17.11
+                                c-9.51,0-17.22,7.66-17.22,17.11v51.37c0,9.45,7.7,17.12,17.22,17.12c9.5,0,17.22-7.67,17.22-17.12v-4.3
+                                c0-4.99,4.63-9.05,10.33-9.05c5.71,0,10.34,4.06,10.34,9.05v58.72c0,9.03,7.7,16.36,17.22,16.36c9.5,0,17.22-7.33,17.22-16.36
+                                v-80.1c0-4.99,4.63-9.05,10.33-9.05c5.71,0,10.34,4.06,10.34,9.05v40.35c0,9.04,7.7,16.36,17.22,16.36
+                                c9.5,0,17.22-7.32,17.22-16.36v-29.67c0-4.99,4.63-9.05,10.34-9.05c5.7,0,10.33,4.06,10.33,9.05v31.71
+                                c0,9.03,7.71,16.35,17.22,16.35c9.51,0,17.22-7.32-17.22-16.35V188.5C301.58,179.47,293.88,172.15,284.36,172.15"/>
+                            <path d="M339.46,216.33c-9.51,0-17.22,7.32-17.22,16.35v65.13c0,9.03,7.7,16.35,17.22,16.35
+                                c9.5,0,17.22-7.32,17.22-16.35v-65.13C356.68,223.65,348.97,216.33,339.46,216.33"/>
+                            <path d="M394.56,249.45c-9.5,0-17.22,7.32-17.22,16.35v16.21c0,9.03,7.71,16.35,17.22,16.35
+                                c9.51,0,17.22-7.32,17.22-16.35V265.8C411.78,256.77,404.08,249.45,394.56,249.45"/>
+                        </g>
+                    </svg>
+                </div>
+                Castbox
+            </a>
+            
+            <a href="https://24six.app/preview/podcast/collection/11014/rabbi-krazs-shiurim" target="_blank">
+                <div class="icon-wrapper">
+                    <svg class="tall-svg" viewBox="0 0 60 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M52.5558 22.5998L20.9208 1.82678C18.7995 0.627795 16.4008 0.00612166 13.9642 0.0238045C11.5276 0.0414873 9.13817 0.697907 7.03448 1.92755C4.9308 3.1572 3.18639 4.91707 1.97535 7.03153C0.764319 9.14598 0.129009 11.5411 0.13283 13.9778V55.5218C0.129185 57.9584 0.764621 60.3534 1.97573 62.4677C3.18683 64.582 4.93126 66.3417 7.03492 67.5713C9.13857 68.8008 11.5279 69.4571 13.9645 69.4748C16.401 69.4924 18.7996 68.8707 20.9208 67.6718L52.5558 46.8998C54.7039 45.6808 56.4904 43.9141 57.7333 41.7797C58.9762 39.6454 59.631 37.2197 59.631 34.7498C59.631 32.2799 58.9762 29.8542 57.7333 27.7198C56.4904 25.5855 54.7039 23.8188 52.5558 22.5998ZM20.6328 55.7498C20.6328 57.54 19.9217 59.2569 18.6558 60.5228C17.3899 61.7886 15.673 62.4998 13.8828 62.4998C12.0926 62.4998 10.3757 61.7886 9.10986 60.5228C7.84399 59.2569 7.13283 57.54 7.13283 55.7498V22.9998H14.6328C16.2241 22.9998 17.7503 23.6319 18.8755 24.7571C20.0007 25.8824 20.6328 27.4085 20.6328 28.9998V55.7498ZM13.8828 20.4998C12.5478 20.4998 11.2428 20.1039 10.1327 19.3622C9.0227 18.6205 8.15753 17.5663 7.64664 16.3329C7.13575 15.0995 7.00208 13.7423 7.26253 12.4329C7.52298 11.1235 8.16585 9.92081 9.10986 8.97681C10.0539 8.03281 11.2566 7.38993 12.566 7.12948C13.8753 6.86903 15.2325 7.0027 16.4659 7.51359C17.6993 8.02449 18.7536 8.88965 19.4953 9.99968C20.2369 11.1097 20.6328 12.4148 20.6328 13.7498C20.6328 15.54 19.9217 17.2569 18.6558 18.5228C17.3899 19.7886 15.673 20.4998 13.8828 20.4998ZM36.6328 45.2498C36.6328 47.04 35.9217 48.7569 34.6558 50.0228C33.3899 51.2886 31.673 51.9998 29.8828 51.9998C28.0926 51.9998 26.3757 51.2886 25.1099 50.0228C23.844 48.7569 23.1328 47.04 23.1328 45.2498V39.4998C23.1328 37.9085 23.765 36.3824 24.8902 35.2571C26.0154 34.1319 27.5415 33.4998 29.1328 33.4998H36.6328V45.2498ZM29.8828 30.9998C28.5478 30.9998 27.2428 30.6039 26.1327 29.8622C25.0227 29.1205 24.1575 28.0663 23.6466 26.8329C23.1358 25.5995 23.0021 24.2423 23.2625 22.9329C23.523 21.6235 24.1659 20.4208 25.1099 19.4768C26.0539 18.5328 27.2566 17.8899 28.566 17.6295C29.8753 17.369 31.2325 17.5027 32.4659 18.0136C33.6993 18.5245 34.7535 19.3897 35.4952 20.4997C36.2369 21.6097 36.6328 22.9148 36.6328 24.2498C36.6328 26.04 35.9217 27.7569 34.6558 29.0228C33.3899 30.2886 31.673 30.9998 29.8828 30.9998ZM45.8828 41.4998C44.5478 41.4998 43.2428 41.1039 42.1327 40.3622C41.0227 39.6205 40.1575 38.5663 39.6466 37.3329C39.1357 36.0995 39.0021 34.7423 39.2625 33.4329C39.523 32.1236 40.1659 30.9208 41.1099 29.9768C42.0539 29.0328 43.2566 28.3899 44.566 28.1295C45.8753 27.869 47.2325 28.0027 48.4659 28.5136C49.6993 29.0245 50.7535 29.8897 51.4952 30.9997C52.2369 32.1097 52.6328 33.4148 52.6328 34.7498C52.6328 36.54 51.9217 38.2569 50.6558 39.5228C49.3899 40.7886 47.673 41.4998 45.8828 41.4998Z" fill="currentColor"/>
+                    </svg>
+                </div>
+                24Six
+            </a>
+
+        </div>
+    </section>
+
+    <section class="pdf-section">
+        <h2 class="section-title">Source Sheet</h2>
+        <div class="pdf-wrapper">
+            <iframe src="https://drive.google.com/file/d/1JYsoF8kZW4nMnrmdJQNWjhia13iuxBgw/preview" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <div class="bottom-buttons">
+        <a href="https://rabbikraz.com" class="btn"><i class="fas fa-home"></i> Home</a>
+        <a href="https://chat.whatsapp.com/BdUZM8mzvXuEpgS9MoGN9W" class="btn"><i class="fab fa-whatsapp"></i> WhatsApp Group</a>
+        <a href="https://rabbikraz.com/sponsor" class="btn btn-gold"><i class="fas fa-gift"></i> Sponsor a Shiur</a>
+    </div>
+
+    <footer>
+        <p>© 2026 Rabbi Kraz's Shiurim. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
