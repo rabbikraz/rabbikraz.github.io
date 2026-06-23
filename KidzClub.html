@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kidz Club Registration</title>
+</head>
+<body style="margin:0; background:#f0f7ff;">
+<!-- Chabad in South Beach . Kidz Club Registration . Prices live in the PRICING object inside the script below. -->
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet" />
+<!-- PayPal SDK (one-time payment). Live client-id, same as the Meal Form. -->
+<script src="https://www.paypal.com/sdk/js?client-id=AQep8b0d5aOphyWo10ZQfAT-mwV0vWeHCjQLID21pSwnJyh4Fw5vNJANgqyTypi1PDiV3AKJ6fbarENP&amp;currency=USD&amp;intent=capture"></script>
+<style type="text/css">/* Scoped Styles for CMS Compatibility */
+    .kids-club-form {
+        /* Kidz Club Palette */
+        --brand-blue: #0093E9;
+        --brand-purple: #80D0C7;
+        --brand-orange: #FF8D29;
+        --brand-yellow: #FFCD3C;
+        --text-dark: #2d3748;
+        --white: #ffffff;
+        --bg-soft: #f0f7ff;
+
+        font-family: 'Nunito', 'Verdana', sans-serif;
+        color: #2d3748;
+        color: var(--text-dark);
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 1.5rem;
+        background-color: #f0f7ff;
+        background-color: var(--bg-soft);
+        background-image: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+        border-radius: 20px;
+        font-size: 20px;
+    }
+
+    .kids-club-form * {
+        box-sizing: border-box;
+    }
+
+    /* Header Image (Banner) - NO OVERLAP */
+    .kids-club-form .header-main-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        position: relative;
+        z-index: 1;
+    }
+
+    .kids-club-form .card {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 10px 25px rgba(0, 147, 233, 0.1);
+        padding: 3rem 2.5rem;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 2;
+        border: 2px solid #eef6ff;
+    }
+
+    /* Playful Headings */
+    .kids-club-form h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3.8rem;
+        background: -webkit-linear-gradient(right, #0093E9, #80D0C7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: #0093E9;
+        text-align: center;
+        margin: 0 0 1rem 0;
+        font-weight: 800;
+        letter-spacing: -1px;
+        line-height: 1.1;
+    }
+
+    .kids-club-form p.subtitle {
+        text-align: center;
+        color: #718096;
+        margin-bottom: 1.4rem;
+        font-size: 1.6rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    /* Program / schedule badges */
+    .kids-club-form .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .kids-club-form .badge {
+        background: #e6f6ff;
+        color: #0093E9;
+        font-weight: 800;
+        font-size: 1.05rem;
+        padding: 0.6rem 1.3rem;
+        border-radius: 40px;
+        border: 2px solid #cdeafe;
+    }
+
+    .kids-club-form .badge.amber {
+        background: #fff6e6;
+        color: #d69e2e;
+        border-color: #ffe6b8;
+    }
+
+    /* Big schedule line */
+    .kids-club-form .schedule-line {
+        text-align: center;
+        font-size: 2.1rem;
+        font-weight: 800;
+        color: #0093E9;
+        margin: 0 0 2rem 0;
+        letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 700px) {
+        .kids-club-form .schedule-line { font-size: 1.55rem; }
+    }
+
+    /* Coupon code row */
+    .kids-club-form .coupon-row {
+        display: flex;
+        gap: 0.6rem;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 420px;
+        margin: 0.4rem auto 0.4rem;
+    }
+
+    .kids-club-form .coupon-row input {
+        width: auto;
+        flex: 1;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .kids-club-form .coupon-btn {
+        background: #0093E9;
+        color: #fff;
+        border: none;
+        border-radius: 16px;
+        padding: 0 1.4rem;
+        font-weight: 800;
+        font-size: 1.05rem;
+        cursor: pointer;
+        font-family: 'Nunito', sans-serif;
+        white-space: nowrap;
+    }
+
+    .kids-club-form .coupon-btn:hover { background: #007ac4; }
+
+    .kids-club-form .coupon-msg {
+        text-align: center;
+        font-weight: 700;
+        font-size: 1rem;
+        min-height: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Early-bird ribbon */
+    .kids-club-form .earlybird-banner {
+        background: linear-gradient(135deg, #FFCD3C 0%, #FF8D29 100%);
+        color: #ffffff;
+        border-radius: 18px;
+        padding: 1.2rem 1.5rem;
+        text-align: center;
+        font-weight: 800;
+        font-size: 1.25rem;
+        margin-bottom: 2.2rem;
+        box-shadow: 0 8px 18px rgba(255, 141, 41, 0.25);
+    }
+
+    .kids-club-form .earlybird-banner small {
+        display: block;
+        font-weight: 600;
+        font-size: 0.95rem;
+        opacity: 0.95;
+        margin-top: 0.3rem;
+    }
+
+    /* Section Titles */
+    .kids-club-form .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        color: #2d3748;
+        border-bottom: 4px dashed #FFCD3C;
+        padding-bottom: 0.8rem;
+        margin: 3rem 0 2rem 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .kids-club-form .section-title::before {
+        content: '\2605';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        background-color: #FF8D29;
+        color: white;
+        margin-right: 15px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+    }
+
+    .kids-club-form .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    @media (max-width: 700px) {
+        .kids-club-form .grid-2 {
+            grid-template-columns: 1fr;
+        }
+
+        .kids-club-form h1 {
+            font-size: 2.8rem;
+        }
+    }
+
+    .kids-club-form .form-group {
+        margin-bottom: 1.8rem;
+    }
+
+    .kids-club-form label {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: #4a5568;
+        margin-left: 4px;
+    }
+
+    /* Inputs - Bubbly and Soft */
+    .kids-club-form input[type="text"],
+    .kids-club-form input[type="email"],
+    .kids-club-form input[type="tel"],
+    .kids-club-form input[type="date"],
+    .kids-club-form select,
+    .kids-club-form textarea {
+        display: block;
+        width: 100%;
+        padding: 1.2rem;
+        background-color: #f7fafc;
+        border: 2px solid #edf2f7 !important;
+        border-radius: 18px !important;
+        font-size: 1.2rem;
+        font-family: 'Nunito', sans-serif;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        color: #2d3748;
+        height: auto;
+    }
+
+    .kids-club-form input:focus,
+    .kids-club-form select:focus,
+    .kids-club-form textarea:focus {
+        outline: none;
+        border-color: #80D0C7 !important;
+        background-color: #ffffff;
+        box-shadow: 0 4px 12px rgba(128, 208, 199, 0.2);
+        transform: translateY(-2px);
+    }
+
+    /* Field error highlight */
+    .kids-club-form .field-error {
+        border-color: #e53e3e !important;
+        background-color: #fff5f5 !important;
+    }
+
+    .kids-club-form .hidden-field {
+        display: none;
+    }
+
+    /* Conditional Wrapper */
+    .kids-club-form .conditional-box {
+        background-color: #fffaf0;
+        padding: 2rem;
+        border-radius: 20px;
+        border: 3px dashed #FF8D29 !important;
+        margin-top: 1.5rem;
+    }
+
+    /* Radio & Checkbox */
+    .kids-club-form .radio-group {
+        display: flex;
+        gap: 2rem;
+        margin-top: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .kids-club-form .radio-label,
+    .kids-club-form .checkbox-label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+
+    .kids-club-form .radio-label input,
+    .kids-club-form .checkbox-label input {
+        margin-right: 1rem;
+        width: 28px;
+        height: 28px;
+        accent-color: #FF8D29;
+    }
+
+    /* Child card */
+    .kids-club-form .child-card {
+        background: #f8fbff;
+        border: 2px solid #e2e8f0;
+        padding: 2rem;
+        border-radius: 24px;
+        margin-bottom: 1.8rem;
+        position: relative;
+    }
+
+    .kids-club-form .child-card .child-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.2rem;
+    }
+
+    .kids-club-form .child-card h4 {
+        margin: 0;
+        color: #0093E9;
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+
+    .kids-club-form .remove-link {
+        background: none;
+        border: none;
+        color: #e53e3e;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        font-family: 'Nunito', sans-serif;
+        padding: 0.3rem 0.6rem;
+        border-radius: 10px;
+    }
+
+    .kids-club-form .remove-link:hover {
+        background: #fff5f5;
+    }
+
+    .kids-club-form .add-btn {
+        background: #e6f6ff;
+        color: #0093E9;
+        border: 2px dashed #0093E9;
+        padding: 1rem 1.6rem;
+        border-radius: 16px;
+        font-size: 1.15rem;
+        font-weight: 800;
+        cursor: pointer;
+        font-family: 'Nunito', sans-serif;
+        transition: all 0.2s;
+        width: 100%;
+    }
+
+    .kids-club-form .add-btn:hover {
+        background: #d4eeff;
+    }
+
+    .kids-club-form .add-btn[disabled] {
+        opacity: 0.45;
+        cursor: not-allowed;
+    }
+
+    /* Parent / guardian + emergency boxes */
+    .kids-club-form .parent-box {
+        background: #f8fbff;
+        border: 1px solid #e2e8f0;
+        padding: 2rem;
+        border-radius: 24px;
+        margin-bottom: 2rem;
+    }
+
+    .kids-club-form .parent-box h4 {
+        margin: 0 0 1.5rem 0;
+        color: #0093E9;
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+
+    /* Payment Section */
+    .kids-club-form .payment-box {
+        background: linear-gradient(135deg, #FFEFD6 0%, #FFF 100%);
+        border: 3px solid #FFCD3C !important;
+        border-radius: 24px;
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        text-align: center;
+    }
+
+    .kids-club-form .price-line {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #8a6d3b;
+        margin: 0.2rem 0;
+    }
+
+    .kids-club-form .total-display {
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: -webkit-linear-gradient(#FF8D29, #FFCD3C);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: #FF8D29;
+        margin-top: 0.6rem;
+        display: block;
+        line-height: 1.1;
+    }
+
+    .kids-club-form .total-sub {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #a07a2c;
+        margin-bottom: 1.8rem;
+        display: block;
+    }
+
+    .kids-club-form .payment-methods {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.2rem;
+        margin: 1.8rem 0;
+    }
+
+    @media (max-width: 700px) {
+        .kids-club-form .payment-methods {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .kids-club-form .payment-method-option {
+        border: 3px solid #edf2f7;
+        border-radius: 20px;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        cursor: pointer;
+        font-weight: 800;
+        font-size: 1.15rem;
+        transition: all 0.2s;
+        color: #888;
+        background: #ffffff;
+    }
+
+    .kids-club-form .payment-method-option small {
+        display: block;
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin-top: 0.4rem;
+        color: #a0aec0;
+    }
+
+    .kids-club-form .payment-method-option:hover {
+        border-color: #80D0C7;
+        color: #4a5568;
+    }
+
+    .kids-club-form .payment-method-option.selected {
+        border-color: #0093E9;
+        background-color: #e6f6ff;
+        color: #0093E9;
+        box-shadow: 0 4px 15px rgba(0, 147, 233, 0.15);
+    }
+
+    .kids-club-form .pay-detail {
+        background: #ffffff;
+        border: 2px solid #ffe6b8;
+        border-radius: 18px;
+        padding: 1.6rem;
+        text-align: left;
+        margin-top: 0.5rem;
+    }
+
+    .kids-club-form .pay-detail p {
+        margin: 0 0 0.6rem 0;
+        font-size: 1.05rem;
+        color: #5b5346;
+    }
+
+    #paypal-button-container {
+        max-width: 360px;
+        margin: 0.5rem auto 0;
+    }
+
+    .kids-club-form .pay-fallback {
+        color: #b7791f;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-top: 0.8rem;
+    }
+
+    /* Button */
+    .kids-club-form .btn-submit {
+        background-color: #0093E9;
+        background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+        color: white;
+        border: none;
+        padding: 1.5rem 3rem;
+        border-radius: 60px;
+        font-size: 1.5rem;
+        font-weight: 800;
+        width: 100%;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-family: 'Nunito', sans-serif;
+        box-shadow: 0 10px 20px rgba(0, 147, 233, 0.3);
+        margin-top: 1.5rem;
+        letter-spacing: 0.5px;
+    }
+
+    .kids-club-form .btn-submit:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 30px rgba(0, 147, 233, 0.4);
+    }
+
+    .kids-club-form .btn-submit[disabled] {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* Success & Error */
+    .kids-club-form .success-message {
+        display: none;
+        text-align: center;
+        padding: 3rem 1rem;
+    }
+
+    .kids-club-form .success-icon {
+        width: 120px;
+        height: 120px;
+        background: #48bb78;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        margin: 0 auto 2rem auto;
+        box-shadow: 0 10px 20px rgba(72, 187, 120, 0.3);
+    }
+
+    .kids-club-form .success-message h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.6rem;
+        color: #2d3748;
+        margin: 0 0 1rem 0;
+    }
+
+    .kids-club-form .success-message p {
+        font-size: 1.25rem;
+        color: #718096;
+        max-width: 560px;
+        margin: 0 auto 1rem;
+    }
+
+    .kids-club-form .error-msg {
+        color: #e53e3e;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        display: none;
+        background: #fff5f5;
+        border: 2px solid #fed7d7;
+        border-radius: 14px;
+        padding: 1rem 1.2rem;
+    }
+
+    .kids-club-form .field-note {
+        font-size: 1rem;
+        color: #718096;
+        margin-bottom: 0.5rem;
+        font-style: italic;
+    }
+</style>
+<div class="kids-club-form" id="kidzApp"><!-- Header Image --><img alt="Kidz Club Banner" class="header-main-img" src="https://chabadinsouthbeach.com/media/images/1375/OOli13752804.png" />
+<div class="card" id="formCard">
+<h1>Kidz Club Registration</h1>
+
+<p class="subtitle">Sign up for the 2026-2027 academic year!</p>
+
+<p class="schedule-line">Wednesdays 3:15 - 4:45 PM</p>
+
+<div class="earlybird-banner" id="earlybirdBanner"></div>
+
+<div id="kidzClubForm"><!-- ============ CHILDREN ============ -->
+<div class="section-title">Children</div>
+
+<div id="childrenWrap"><!-- Child 0 -->
+<div class="child-card" data-child="0" id="childCard0">
+<div class="child-head">
+<h4 id="childHead0">Child Information</h4>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>First Name *</label> <input data-f="first" name="c0_first" placeholder="Child's Name" type="text" /></div>
+
+<div class="form-group"><label>Last Name *</label> <input data-f="last" name="c0_last" placeholder="Family Name" type="text" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Hebrew Name</label> <input data-f="heb" name="c0_heb" type="text" /></div>
+
+<div class="form-group"><label>Date of Birth *</label> <input data-f="dob" name="c0_dob" type="date" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Grade Entering *</label> <select data-f="grade" name="c0_grade"><option value="">Select Grade</option><option value="Pre-K">Pre-K</option><option value="Kindergarten">Kindergarten</option><option value="1st">1st Grade</option><option value="2nd">2nd Grade</option><option value="3rd">3rd Grade</option><option value="4th">4th Grade</option><option value="5th">5th Grade</option> </select></div>
+
+<div class="form-group"><label>Previous Jewish Education</label> <input data-f="prev" name="c0_prev" type="text" /></div>
+</div>
+
+<div class="form-group"><label>Allergies / Medical Notes</label>
+<p class="field-note">Anything our staff should know to keep this child safe.</p>
+<textarea data-f="allergy" name="c0_allergy" rows="2"></textarea></div>
+</div>
+<!-- Child 1 (hidden) -->
+
+<div class="child-card hidden-field" data-child="1" id="childCard1">
+<div class="child-head">
+<h4 id="childHead1">Child 2 Information</h4>
+<button class="remove-link" onclick="removeChild(1)" type="button">Remove</button></div>
+
+<div class="grid-2">
+<div class="form-group"><label>First Name *</label> <input data-f="first" name="c1_first" placeholder="Child's Name" type="text" /></div>
+
+<div class="form-group"><label>Last Name *</label> <input data-f="last" name="c1_last" placeholder="Family Name" type="text" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Hebrew Name</label> <input data-f="heb" name="c1_heb" type="text" /></div>
+
+<div class="form-group"><label>Date of Birth *</label> <input data-f="dob" name="c1_dob" type="date" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Grade Entering *</label> <select data-f="grade" name="c1_grade"><option value="">Select Grade</option><option value="Pre-K">Pre-K</option><option value="Kindergarten">Kindergarten</option><option value="1st">1st Grade</option><option value="2nd">2nd Grade</option><option value="3rd">3rd Grade</option><option value="4th">4th Grade</option><option value="5th">5th Grade</option> </select></div>
+
+<div class="form-group"><label>Previous Jewish Education</label> <input data-f="prev" name="c1_prev" type="text" /></div>
+</div>
+
+<div class="form-group"><label>Allergies / Medical Notes</label>
+<p class="field-note">Anything our staff should know to keep this child safe.</p>
+<textarea data-f="allergy" name="c1_allergy" rows="2"></textarea></div>
+</div>
+<!-- Child 2 (hidden) -->
+
+<div class="child-card hidden-field" data-child="2" id="childCard2">
+<div class="child-head">
+<h4 id="childHead2">Child 3 Information</h4>
+<button class="remove-link" onclick="removeChild(2)" type="button">Remove</button></div>
+
+<div class="grid-2">
+<div class="form-group"><label>First Name *</label> <input data-f="first" name="c2_first" placeholder="Child's Name" type="text" /></div>
+
+<div class="form-group"><label>Last Name *</label> <input data-f="last" name="c2_last" placeholder="Family Name" type="text" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Hebrew Name</label> <input data-f="heb" name="c2_heb" type="text" /></div>
+
+<div class="form-group"><label>Date of Birth *</label> <input data-f="dob" name="c2_dob" type="date" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Grade Entering *</label> <select data-f="grade" name="c2_grade"><option value="">Select Grade</option><option value="Pre-K">Pre-K</option><option value="Kindergarten">Kindergarten</option><option value="1st">1st Grade</option><option value="2nd">2nd Grade</option><option value="3rd">3rd Grade</option><option value="4th">4th Grade</option><option value="5th">5th Grade</option> </select></div>
+
+<div class="form-group"><label>Previous Jewish Education</label> <input data-f="prev" name="c2_prev" type="text" /></div>
+</div>
+
+<div class="form-group"><label>Allergies / Medical Notes</label>
+<p class="field-note">Anything our staff should know to keep this child safe.</p>
+<textarea data-f="allergy" name="c2_allergy" rows="2"></textarea></div>
+</div>
+<!-- Child 3 (hidden) -->
+
+<div class="child-card hidden-field" data-child="3" id="childCard3">
+<div class="child-head">
+<h4 id="childHead3">Child 4 Information</h4>
+<button class="remove-link" onclick="removeChild(3)" type="button">Remove</button></div>
+
+<div class="grid-2">
+<div class="form-group"><label>First Name *</label> <input data-f="first" name="c3_first" placeholder="Child's Name" type="text" /></div>
+
+<div class="form-group"><label>Last Name *</label> <input data-f="last" name="c3_last" placeholder="Family Name" type="text" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Hebrew Name</label> <input data-f="heb" name="c3_heb" type="text" /></div>
+
+<div class="form-group"><label>Date of Birth *</label> <input data-f="dob" name="c3_dob" type="date" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Grade Entering *</label> <select data-f="grade" name="c3_grade"><option value="">Select Grade</option><option value="Pre-K">Pre-K</option><option value="Kindergarten">Kindergarten</option><option value="1st">1st Grade</option><option value="2nd">2nd Grade</option><option value="3rd">3rd Grade</option><option value="4th">4th Grade</option><option value="5th">5th Grade</option> </select></div>
+
+<div class="form-group"><label>Previous Jewish Education</label> <input data-f="prev" name="c3_prev" type="text" /></div>
+</div>
+
+<div class="form-group"><label>Allergies / Medical Notes</label>
+<p class="field-note">Anything our staff should know to keep this child safe.</p>
+<textarea data-f="allergy" name="c3_allergy" rows="2"></textarea></div>
+</div>
+</div>
+
+<button class="add-btn" id="addChildBtn" onclick="addChild()" type="button">+ Add another child</button>
+<!-- ============ FAMILY INFORMATION ============ -->
+
+<div class="section-title">Family Information</div>
+
+<div class="parent-box">
+<h4>Mother</h4>
+
+<div class="grid-2">
+<div class="form-group"><label>Mother's Name *</label> <input name="mo_name" type="text" /></div>
+
+<div class="form-group"><label>Mother's Hebrew Name</label> <input name="mo_heb" type="text" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Mother's Email *</label> <input name="mo_email" type="email" /></div>
+
+<div class="form-group"><label>Mother's Cell *</label> <input name="mo_cell" type="tel" /></div>
+</div>
+</div>
+
+<div class="parent-box">
+<h4>Father</h4>
+
+<div class="grid-2">
+<div class="form-group"><label>Father's Name *</label> <input name="fa_name" type="text" /></div>
+
+<div class="form-group"><label>Father's Hebrew Name</label> <input name="fa_heb" type="text" /></div>
+</div>
+
+<div class="grid-2">
+<div class="form-group"><label>Father's Email</label> <input name="fa_email" type="email" /></div>
+
+<div class="form-group"><label>Father's Cell</label> <input name="fa_cell" type="tel" /></div>
+</div>
+</div>
+
+<div class="form-group"><label>Parents' Status *</label>
+<div class="radio-group"><label class="radio-label"><input name="marital" onclick="onMaritalChange()" type="radio" value="married" /> Married </label> <label class="radio-label"><input name="marital" onclick="onMaritalChange()" type="radio" value="separated" /> Separated / Divorced </label></div>
+</div>
+
+<div class="hidden-field" id="homeAddressWrap">
+<div class="form-group"><label>Home Address *</label> <input name="homeAddress" placeholder="Street, City, State, Zip" type="text" /></div>
+</div>
+
+<div class="hidden-field conditional-box" id="splitAddressWrap">
+<div class="form-group"><label>Mother's Address *</label> <input name="motherAddress" placeholder="Street, City, State, Zip" type="text" /></div>
+
+<div class="form-group" style="margin-bottom:0;"><label>Father's Address *</label> <input name="fatherAddress" placeholder="Street, City, State, Zip" type="text" /></div>
+</div>
+<!-- ============ EMERGENCY CONTACT ============ -->
+
+<div class="section-title">Emergency Contact</div>
+
+<div class="parent-box">
+<p class="field-note" style="margin-top:0;">Someone other than the parents above we can call in an emergency.</p>
+
+<div class="grid-2">
+<div class="form-group"><label>Full Name *</label> <input name="em_name" type="text" /></div>
+
+<div class="form-group"><label>Phone *</label> <input name="em_phone" type="tel" /></div>
+</div>
+
+<div class="form-group" style="margin-bottom:0;"><label>Relationship to Child *</label> <input name="em_rel" placeholder="e.g. Grandmother, Aunt, Neighbor" type="text" /></div>
+</div>
+<!-- ============ SCHOOL AND PICKUP ============ -->
+
+<div class="section-title">School &amp; Pickup</div>
+
+<div class="form-group"><label>School *</label> <select id="schoolSelect" name="school" onchange="onSchoolChange()"><option value="">Select School</option><option value="South Pointe Elementary">South Pointe Elementary</option><option value="Other">Other</option> </select></div>
+
+<div class="hidden-field conditional-box" id="otherSchoolWrapper">
+<div class="form-group" style="margin-bottom:0;"><label>Please specify school *</label> <input id="otherSchoolInput" name="otherSchool" placeholder="Name of School" type="text" /></div>
+</div>
+
+<div class="hidden-field conditional-box" id="pickupWrapper"><label>Will you need pickup from South Pointe Elementary? *</label>
+<div class="radio-group"><label class="radio-label"><input name="pickup" type="radio" value="Yes" /> Yes </label> <label class="radio-label"> <input name="pickup" type="radio" value="No" /> No </label></div>
+</div>
+
+<div class="form-group" style="margin-top:2rem;"><label>Anything else we should know?</label>
+<p class="field-note">Carpool notes, special needs, requests, etc.</p>
+<textarea name="familyNotes" rows="3"></textarea></div>
+
+<div class="form-group"><label class="checkbox-label"><input id="photoConsent" name="photoConsent" type="checkbox" /> I give permission for photos of my child(ren) at Kidz Club to be used in Chabad publications.</label></div>
+<!-- ============ PAYMENT ============ -->
+
+<div class="section-title">Tuition &amp; Payment</div>
+
+<div class="payment-box">
+<div class="price-line" id="priceLine">Loading pricing...</div>
+<span class="total-display" id="totalDisplay">$0</span> <span class="total-sub" id="totalSub"></span>
+
+<label style="text-align:center; display:block; color:#a07a2c; margin-top:1rem;">Have a discount code?</label>
+<div class="coupon-row"><input id="couponInput" placeholder="Enter code" type="text" /> <button class="coupon-btn" onclick="applyCoupon()" type="button">Apply</button></div>
+<div class="coupon-msg" id="couponMsg"></div>
+
+<label id="payChooseLabel" style="text-align:center; display:block; color:#a07a2c;">How would you like to pay? *</label>
+
+<div class="payment-methods" id="paymentMethods">
+<div class="payment-method-option" data-method="paypal" id="pmPaypal" onclick="selectMethod('paypal')">Pay Now <small>Card or PayPal</small></div>
+<div class="payment-method-option" data-method="installments" id="pmInstall" onclick="selectMethod('installments')">Installments <small>Monthly plan</small></div>
+<div class="payment-method-option" data-method="later" id="pmLater" onclick="selectMethod('later')">Cash / Check <small>Pay later</small></div>
+</div>
+
+<div class="hidden-field pay-detail" id="payDetailPaypal">
+<p>Pay the full amount securely now with any card or your PayPal account.</p>
+<div id="paypal-button-container"></div>
+<p class="pay-fallback hidden-field" id="paypalFallback">Online payment is not available right now. Please choose Cash / Check and we will help you complete payment.</p>
+</div>
+
+<div class="hidden-field pay-detail" id="payDetailInstall">
+<p><strong>Pay monthly.</strong> Register now and our office will set up a simple monthly payment plan with you for the total shown above. No payment is collected on this form.</p>
+</div>
+
+<div class="hidden-field pay-detail" id="payDetailLater">
+<p>Register now and pay by cash or check. Please bring your payment to the first session, or drop it at the Chabad office.</p>
+<div class="radio-group"><label class="radio-label"><input name="laterMethod" type="radio" value="Cash" /> Cash </label> <label class="radio-label"><input name="laterMethod" type="radio" value="Check" /> Check </label></div>
+</div>
+
+<div class="hidden-field pay-detail" id="freeNotice">
+<p style="text-align:center; font-weight:800; color:#2f855a; margin:0;">No payment needed - your registration is free with this code. Just complete it below!</p>
+</div>
+</div>
+
+<div class="error-msg" id="formError"></div>
+
+<button class="btn-submit hidden-field" id="submitBtn" onclick="completeRegistration()" type="button">Complete Registration</button></div>
+</div>
+<!-- ============ SUCCESS ============ -->
+
+<div class="card success-message" id="successCard">
+<div class="success-icon">&#10003;</div>
+
+<h2 id="successTitle">You're all signed up!</h2>
+
+<p id="successBody">Thank you for registering for Kidz Club. A confirmation email is on its way to you.</p>
+
+<p id="successPay" style="font-weight:700; color:#0093E9;"></p>
+</div>
+</div>
+<script type="text/javascript">/* ============================================================
+     KIDZ CLUB REGISTRATION - front-end logic
+     CMS-safe: no literal less-than or ampersand anywhere in this script.
+     ============================================================ */
+
+  /* ---------- PRICES (THE ONLY THING YOU NEED TO EDIT) ---------- */
+  var PRICING = {
+    program: 'Kidz Club 2026-2027',
+    schedule: 'Wednesdays 3:15 - 4:45 PM',
+    regular: 950,                   /* full price PER CHILD   (set this) */
+    maxChildren: 4,
+    /* Discount codes families can enter at checkout.
+       type 'percent' = value% off per child; type 'free' = no charge.
+       expires '' means it never expires. */
+    codes: [
+      { code: 'EARLY', type: 'percent', value: 10, expires: '2026-07-15' },
+      { code: 'FREEEE', type: 'free', value: 100, expires: '' }
+    ]
+  };
+
+  /* Backend web-app URL (Kids Club Script.js /exec). Leave '' to skip the
+     network send (the confirmation still shows). */
+  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwjc9lFEUUKflDW-SPtLULd0OfpjqdLiyS0O5EPolyQz4v9-82-wmYVZJheqAMt0cAmMg/exec';
+
+  /* CMS-safe character constants (built via hex escape, never as literals). */
+  var AMP = '\x26';
+  var LT = '\x3C';
+  var GT = '>';
+
+  var CHILD_INDEXES = [0, 1, 2, 3];
+  var state = { payment: { method: '', status: 'pending' }, coupon: null };
+
+  function gid(id) { return document.getElementById(id); }
+  function val(name) {
+    var el = document.querySelector('[name="' + name + '"]');
+    return el ? String(el.value || '').trim() : '';
+  }
+  function money(n) { return '$' + Number(n || 0).toLocaleString('en-US'); }
+
+  /* ---------- Discount-code logic ---------- */
+  /* Full price is the default. A valid code at checkout discounts it; families
+     choose whether to apply one. Codes are defined in PRICING.codes. */
+  function findCode(entered) {
+    var c = String(entered || '').trim().toUpperCase();
+    var hit = null;
+    PRICING.codes.forEach(function (x) { if (x.code === c) { hit = x; } });
+    return hit;
+  }
+  function isExpired(codeObj) {
+    if (!codeObj) { return false; }
+    if (!codeObj.expires) { return false; }
+    var now = new Date();
+    var d = new Date(codeObj.expires + 'T23:59:59');
+    return (now.getTime() > d.getTime()) ? true : false;
+  }
+  function discountPerChild() {
+    if (!state.coupon) { return 0; }
+    if (state.coupon.type === 'free') { return PRICING.regular; }
+    if (state.coupon.type === 'percent') { return Math.round(PRICING.regular * state.coupon.value / 100); }
+    return 0;
+  }
+  function pricePerChild() { return PRICING.regular - discountPerChild(); }
+  function isFree() {
+    if (!state.coupon) { return false; }
+    return (state.coupon.type === 'free') ? true : false;
+  }
+
+  function prettyDeadline(dateStr) {
+    var months = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    var parts = String(dateStr || '').split('-');
+    var y = Number(parts[0]); var m = Number(parts[1]); var dd = Number(parts[2]);
+    return months[m - 1] + ' ' + dd + ', ' + y;
+  }
+
+  function applyCoupon() {
+    var entered = gid('couponInput').value;
+    var msg = gid('couponMsg');
+    var codeObj = findCode(entered);
+    if (!codeObj) {
+      state.coupon = null;
+      msg.textContent = (String(entered || '').trim() === '') ? 'Enter a code, then tap Apply.' : 'That code is not valid.';
+      msg.style.color = '#c53030';
+    } else if (isExpired(codeObj)) {
+      state.coupon = null;
+      msg.textContent = 'Sorry, that code has expired.';
+      msg.style.color = '#c53030';
+    } else {
+      state.coupon = codeObj;
+      msg.textContent = (codeObj.type === 'free')
+        ? 'Code applied! Your registration is free.'
+        : ('Code applied! ' + codeObj.value + '% off per child.');
+      msg.style.color = '#2f855a';
+    }
+    refreshPaymentUI();
+    updatePricing();
+  }
+
+  /* When the code makes it free, hide payment options and just let them
+     finish; otherwise show the normal payment choices. */
+  function refreshPaymentUI() {
+    var free = isFree();
+    var label = gid('payChooseLabel');
+    var methods = gid('paymentMethods');
+    var freeNotice = gid('freeNotice');
+    var submitBtn = gid('submitBtn');
+    if (free) {
+      if (label) { label.style.display = 'none'; }
+      if (methods) { methods.style.display = 'none'; }
+      ['Paypal', 'Install', 'Later'].forEach(function (x) { var d = gid('payDetail' + x); if (d) { d.style.display = 'none'; } });
+      if (freeNotice) { freeNotice.style.display = 'block'; }
+      state.payment.method = 'free';
+      if (submitBtn) { submitBtn.style.display = 'block'; submitBtn.textContent = 'Complete Free Registration'; }
+    } else {
+      if (label) { label.style.display = 'block'; }
+      if (methods) { methods.style.display = 'grid'; }
+      if (freeNotice) { freeNotice.style.display = 'none'; }
+      if (state.payment.method === 'free') { state.payment.method = ''; }
+      if (submitBtn) {
+        if (state.payment.method === 'paypal') { submitBtn.style.display = 'none'; }
+        else if (state.payment.method) { submitBtn.style.display = 'block'; submitBtn.textContent = (state.payment.method === 'installments') ? 'Complete Registration (Installments)' : 'Complete Registration'; }
+        else { submitBtn.style.display = 'none'; }
+      }
+    }
+  }
+
+  /* ---------- Children ---------- */
+  function isActive(i) {
+    var card = gid('childCard' + i);
+    if (!card) { return false; }
+    if (card.style.display === 'none') { return false; }
+    if (card.className.indexOf('hidden-field') > -1) { return false; }
+    return true;
+  }
+  function activeChildCount() {
+    var n = 0;
+    CHILD_INDEXES.forEach(function (i) { if (isActive(i)) { n = n + 1; } });
+    return n;
+  }
+  function firstHiddenChild() {
+    var found = -1;
+    CHILD_INDEXES.forEach(function (i) {
+      if (found === -1) { if (!isActive(i)) { found = i; } }
+    });
+    return found;
+  }
+  function showCard(i) {
+    var card = gid('childCard' + i);
+    if (!card) { return; }
+    card.className = card.className.split('hidden-field').join('').replace(/\s+/g, ' ').trim();
+    card.style.display = 'block';
+  }
+  function hideCard(i) {
+    var card = gid('childCard' + i);
+    if (!card) { return; }
+    if (card.className.indexOf('hidden-field') === -1) { card.className = card.className + ' hidden-field'; }
+    card.style.display = 'none';
+    /* clear its fields so a removed child is not submitted */
+    ['first', 'last', 'heb', 'dob', 'grade', 'prev', 'allergy'].forEach(function (f) {
+      var el = document.querySelector('[name="c' + i + '_' + f + '"]');
+      if (el) { el.value = ''; el.className = el.className.split('field-error').join('').trim(); }
+    });
+  }
+  function addChild() {
+    var i = firstHiddenChild();
+    if (i === -1) { return; }
+    showCard(i);
+    refreshAddBtn();
+    updatePricing();
+  }
+  function removeChild(i) {
+    hideCard(i);
+    refreshAddBtn();
+    updatePricing();
+  }
+  function refreshAddBtn() {
+    var btn = gid('addChildBtn');
+    if (!btn) { return; }
+    if (firstHiddenChild() === -1) { btn.setAttribute('disabled', 'disabled'); btn.textContent = 'Maximum children added'; }
+    else { btn.removeAttribute('disabled'); btn.textContent = '+ Add another child'; }
+  }
+
+  /* ---------- Marital status -> which address fields show ---------- */
+  function maritalValue() {
+    var el = document.querySelector('[name="marital"]:checked');
+    return el ? el.value : '';
+  }
+  function onMaritalChange() {
+    var m = maritalValue();
+    var home = gid('homeAddressWrap');
+    var split = gid('splitAddressWrap');
+    if (m === 'married') {
+      if (home) { home.style.display = 'block'; }
+      if (split) { split.style.display = 'none'; }
+    } else if (m === 'separated') {
+      if (home) { home.style.display = 'none'; }
+      if (split) { split.style.display = 'block'; }
+    } else {
+      if (home) { home.style.display = 'none'; }
+      if (split) { split.style.display = 'none'; }
+    }
+  }
+
+  /* ---------- School conditional ---------- */
+  function onSchoolChange() {
+    var school = val('school');
+    var otherWrap = gid('otherSchoolWrapper');
+    var pickupWrap = gid('pickupWrapper');
+    if (school === 'Other') {
+      otherWrap.style.display = 'block';
+      pickupWrap.style.display = 'none';
+    } else if (school === 'South Pointe Elementary') {
+      otherWrap.style.display = 'none';
+      pickupWrap.style.display = 'block';
+    } else {
+      otherWrap.style.display = 'none';
+      pickupWrap.style.display = 'none';
+    }
+  }
+
+  /* ---------- Pricing display ---------- */
+  function updatePricing() {
+    var per = pricePerChild();
+    var count = activeChildCount();
+    var total = per * count;
+    var childWord = (count === 1) ? ' child' : ' children';
+    if (isFree()) {
+      gid('priceLine').textContent = 'Free registration (code ' + state.coupon.code + ') for ' + count + childWord;
+    } else if (state.coupon) {
+      gid('priceLine').textContent = money(PRICING.regular) + ' per child, less code ' + state.coupon.code +
+        ' (' + state.coupon.value + '% off): ' + money(per) + ' x ' + count + childWord;
+    } else {
+      gid('priceLine').textContent = 'Tuition: ' + money(PRICING.regular) + ' per child  x  ' + count + childWord;
+    }
+    gid('totalDisplay').textContent = money(total);
+    gid('totalSub').textContent = PRICING.program;
+    state.total = total;
+    state.perChild = per;
+    state.tier = state.coupon ? (isFree() ? 'free' : 'earlybird') : 'regular';
+  }
+
+  function renderEarlyBanner() {
+    var b = gid('earlybirdBanner');
+    if (!b) { return; }
+    var ec = findCode('EARLY');
+    if (!ec || isExpired(ec)) { b.style.display = 'none'; return; }
+    b.style.display = 'block';
+    b.textContent = 'EARLY-BIRD SPECIAL: ' + ec.value + '% OFF';
+    var s = document.createElement('small');
+    var disc = Math.round(PRICING.regular * ec.value / 100);
+    s.textContent = 'Use code ' + ec.code + ' at checkout to save ' + money(disc) + ' per child - through ' + prettyDeadline(ec.expires);
+    b.appendChild(s);
+  }
+
+  /* ---------- Payment method selection ---------- */
+  function selectMethod(method) {
+    state.payment.method = method;
+    ['paypal', 'installments', 'later'].forEach(function (m) {
+      var opt = gid('pm' + (m === 'installments' ? 'Install' : (m === 'later' ? 'Later' : 'Paypal')));
+      var det = gid('payDetail' + (m === 'installments' ? 'Install' : (m === 'later' ? 'Later' : 'Paypal')));
+      if (opt) {
+        if (m === method) { if (opt.className.indexOf('selected') === -1) { opt.className = opt.className + ' selected'; } }
+        else { opt.className = opt.className.split('selected').join('').replace(/\s+/g, ' ').trim(); }
+      }
+      if (det) { det.style.display = (m === method) ? 'block' : 'none'; }
+    });
+    var submitBtn = gid('submitBtn');
+    if (method === 'paypal') {
+      submitBtn.style.display = 'none';
+      renderPayPal();
+    } else {
+      submitBtn.style.display = 'block';
+      submitBtn.textContent = (method === 'installments') ? 'Complete Registration (Installments)' : 'Complete Registration';
+    }
+    clearError();
+  }
+
+  /* ---------- Validation ---------- */
+  function mark(el, bad) {
+    if (!el) { return; }
+    if (bad) { if (el.className.indexOf('field-error') === -1) { el.className = el.className + ' field-error'; } }
+    else { el.className = el.className.split('field-error').join('').replace(/\s+/g, ' ').trim(); }
+  }
+  function need(name, missing) {
+    var el = document.querySelector('[name="' + name + '"]');
+    var ok = el ? String(el.value || '').trim() !== '' : false;
+    mark(el, !ok);
+    if (!ok) { missing.push(name); }
+    return ok;
+  }
+  function validateAll() {
+    var missing = [];
+    /* children */
+    CHILD_INDEXES.forEach(function (i) {
+      if (isActive(i)) {
+        need('c' + i + '_first', missing);
+        need('c' + i + '_last', missing);
+        need('c' + i + '_dob', missing);
+        need('c' + i + '_grade', missing);
+      }
+    });
+    if (activeChildCount() === 0) { missing.push('child'); }
+
+    /* family */
+    need('mo_name', missing);
+    need('mo_email', missing);
+    need('mo_cell', missing);
+    need('fa_name', missing);
+    var marital = maritalValue();
+    if (!marital) { missing.push('marital'); }
+    if (marital === 'married') { need('homeAddress', missing); }
+    if (marital === 'separated') { need('motherAddress', missing); need('fatherAddress', missing); }
+
+    /* emergency */
+    need('em_name', missing);
+    need('em_phone', missing);
+    need('em_rel', missing);
+
+    /* school */
+    var school = val('school');
+    need('school', missing);
+    if (school === 'Other') { need('otherSchool', missing); }
+    if (school === 'South Pointe Elementary') {
+      var pk = document.querySelector('[name="pickup"]:checked');
+      if (!pk) { missing.push('pickup'); }
+    }
+
+    /* payment method */
+    if (!state.payment.method) { missing.push('payment'); }
+
+    if (missing.length > 0) {
+      showError('Please complete all required fields (marked with *) before continuing.');
+      var firstBad = document.querySelector('.field-error');
+      if (firstBad) { if (firstBad.scrollIntoView) { firstBad.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }
+      return false;
+    }
+    clearError();
+    return true;
+  }
+
+  function showError(msg) { var e = gid('formError'); if (e) { e.textContent = msg; e.style.display = 'block'; } }
+  function clearError() { var e = gid('formError'); if (e) { e.style.display = 'none'; } }
+
+  /* ---------- Gather + XML ---------- */
+  function xmlEsc(v) {
+    var s = String((v === null) ? '' : (v === undefined ? '' : v));
+    s = s.split(AMP).join(AMP + 'amp;');
+    s = s.split(LT).join(AMP + 'lt;');
+    s = s.split(GT).join(AMP + 'gt;');
+    s = s.split('"').join(AMP + 'quot;');
+    return s;
+  }
+  function at(k, v) { return ' ' + k + '="' + xmlEsc(v) + '"'; }
+  function open(tag, attrs) { return LT + tag + (attrs || '') + GT; }
+  function close(tag) { return LT + '/' + tag + GT; }
+  function selfEl(tag, attrs) { return LT + tag + (attrs || '') + ' /' + GT; }
+  function el(tag, text) { return LT + tag + GT + xmlEsc(text) + LT + '/' + tag + GT; }
+
+  function gatherChildren() {
+    var kids = [];
+    CHILD_INDEXES.forEach(function (i) {
+      if (isActive(i)) {
+        kids.push({
+          first: val('c' + i + '_first'),
+          last: val('c' + i + '_last'),
+          heb: val('c' + i + '_heb'),
+          dob: val('c' + i + '_dob'),
+          grade: val('c' + i + '_grade'),
+          prev: val('c' + i + '_prev'),
+          allergy: val('c' + i + '_allergy')
+        });
+      }
+    });
+    return kids;
+  }
+
+  function buildXml() {
+    var kids = gatherChildren();
+    var count = kids.length;
+    var per = pricePerChild();
+    var subtotal = per * count;
+    var laterEl = document.querySelector('[name="laterMethod"]:checked');
+    var laterKind = laterEl ? laterEl.value : '';
+    var photo = gid('photoConsent') ? (gid('photoConsent').checked ? 'true' : 'false') : 'false';
+
+    var s = open('kidzclub');
+    s += open('registration',
+      at('program', PRICING.program) +
+      at('schedule', PRICING.schedule) +
+      at('pricingTier', state.tier || (state.coupon ? (isFree() ? 'free' : 'earlybird') : 'regular')) +
+      at('pricePerChild', per) +
+      at('childCount', count) +
+      at('subtotal', subtotal) +
+      at('code', state.coupon ? state.coupon.code : '') +
+      at('fullPrice', PRICING.regular) +
+      at('photoConsent', photo));
+
+    s += open('children');
+    kids.forEach(function (c) {
+      s += selfEl('child',
+        at('firstName', c.first) + at('lastName', c.last) + at('hebrewName', c.heb) +
+        at('dob', c.dob) + at('grade', c.grade) +
+        at('prevEducation', c.prev) + at('allergies', c.allergy));
+    });
+    s += close('children');
+
+    s += selfEl('school', at('name', val('school')) + at('other', val('otherSchool')) +
+      at('pickup', (document.querySelector('[name="pickup"]:checked') ? document.querySelector('[name="pickup"]:checked').value : '')));
+
+    s += open('family', at('maritalStatus', maritalValue()));
+    s += selfEl('mother', at('name', val('mo_name')) + at('hebrewName', val('mo_heb')) + at('email', val('mo_email')) + at('cell', val('mo_cell')));
+    s += selfEl('father', at('name', val('fa_name')) + at('hebrewName', val('fa_heb')) + at('email', val('fa_email')) + at('cell', val('fa_cell')));
+    s += el('homeAddress', val('homeAddress'));
+    s += el('motherAddress', val('motherAddress'));
+    s += el('fatherAddress', val('fatherAddress'));
+    s += close('family');
+
+    s += selfEl('emergency', at('name', val('em_name')) + at('phone', val('em_phone')) + at('relationship', val('em_rel')));
+
+    var pay = state.payment;
+    s += selfEl('payment',
+      at('method', pay.method) +
+      at('status', pay.status || 'pending') +
+      at('provider', pay.provider || '') +
+      at('transactionId', pay.transactionId || '') +
+      at('amount', (pay.amount !== undefined) ? pay.amount : subtotal) +
+      at('laterKind', laterKind));
+
+    s += el('notes', val('familyNotes'));
+    s += close('registration');
+    s += close('kidzclub');
+    return s;
+  }
+
+  function submitXml(xml) {
+    if (!SUBMIT_URL) { return; }
+    try {
+      fetch(SUBMIT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: xml
+      }).catch(function () { });
+    } catch (e) { }
+  }
+
+  /* ---------- Finalize ---------- */
+  function finalize() {
+    var xml = buildXml();
+    state.xml = xml;
+    submitXml(xml);
+
+    var firstName = val('c0_first') || 'your child';
+    var count = activeChildCount();
+    var who = (count > 1) ? 'your children' : firstName;
+    gid('successTitle').textContent = "You're all signed up!";
+    gid('successBody').textContent = 'Thank you for registering ' + who + ' for ' + PRICING.program +
+      '. A confirmation email is on its way to ' + (val('mo_email') || 'you') + '.';
+
+    var payMsg = '';
+    if (state.payment.method === 'free') { payMsg = 'No payment needed - your registration is free. See you Wednesday!'; }
+    else if (state.payment.method === 'paypal') { payMsg = 'Payment received - thank you! See you Wednesday.'; }
+    else if (state.payment.method === 'installments') { payMsg = 'Our office will reach out to set up your monthly payment plan.'; }
+    else {
+      var kind = (document.querySelector('[name="laterMethod"]:checked') || {}).value || 'cash or check';
+      payMsg = 'Please bring your ' + String(kind).toLowerCase() + ' payment to the first session.';
+    }
+    gid('successPay').textContent = payMsg;
+
+    gid('formCard').style.display = 'none';
+    gid('successCard').style.display = 'block';
+    if (gid('successCard').scrollIntoView) { gid('successCard').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+
+  /* non-PayPal submit */
+  function completeRegistration() {
+    if (!validateAll()) { return; }
+    if (state.payment.method === 'free') {
+      state.payment.status = 'free';
+      state.payment.provider = '';
+    } else if (state.payment.method === 'installments') {
+      state.payment.status = 'plan_requested';
+      state.payment.provider = '';
+    } else if (state.payment.method === 'later') {
+      state.payment.status = 'pending';
+      state.payment.provider = '';
+    }
+    state.payment.amount = state.total;
+    var btn = gid('submitBtn');
+    if (btn) { btn.setAttribute('disabled', 'disabled'); btn.textContent = 'Submitting...'; }
+    finalize();
+  }
+
+  /* ---------- PayPal ---------- */
+  var paypalRendered = false;
+  function renderPayPal() {
+    if (paypalRendered) { return; }
+    if (!window.paypal) {
+      var fb = gid('paypalFallback');
+      if (fb) { fb.style.display = 'block'; }
+      return;
+    }
+    paypalRendered = true;
+    window.paypal.Buttons({
+      style: { layout: 'vertical', color: 'gold', shape: 'pill', label: 'pay' },
+      onClick: function (data, actions) {
+        if (validateAll()) { return actions.resolve(); }
+        return actions.reject();
+      },
+      createOrder: function (data, actions) {
+        var amt = Number(state.total || (pricePerChild() * activeChildCount()));
+        return actions.order.create({
+          purchase_units: [{
+            description: PRICING.program,
+            amount: { value: amt.toFixed(2), currency_code: 'USD' }
+          }]
+        });
+      },
+      onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+          state.payment = {
+            method: 'paypal', status: 'paid', provider: 'paypal',
+            transactionId: data.orderID, amount: state.total
+          };
+          finalize();
+        });
+      },
+      onError: function () {
+        showError('There was a problem with the payment. Please try again or choose Cash / Check.');
+      }
+    }).render('#paypal-button-container');
+  }
+
+  /* ---------- Auto-resize when embedded in an iframe ---------- */
+  /* Posts our height to the parent page so the iframe can grow/shrink with the
+     form (add a child, switch payment, show success). The parent listener is
+     in "Kids Club Form Embed.html". No effect when opened directly. */
+  function postHeight() {
+    if (window.top === window) { return; }
+    var h = document.body ? document.body.scrollHeight : 0;
+    /* Apps Script double-wraps this page, so window.parent is Google's frame,
+       not the ChabadOne page. Post to window.top (the ChabadOne page) so its
+       resize listener actually receives the height. */
+    try { window.top.postMessage({ kcFormHeight: h }, '*'); } catch (e) { }
+  }
+
+  /* ---------- Init ---------- */
+  renderEarlyBanner();
+  updatePricing();
+  refreshAddBtn();
+  onSchoolChange();
+  postHeight();
+  if (window.addEventListener) { window.addEventListener('load', postHeight); }
+  setInterval(postHeight, 400);
+</script>
+</body>
+</html>
